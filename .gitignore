@@ -1,0 +1,20 @@
+.venv/
+
+
+# folders with data
+cropped_people/
+mapillary_images/
+data/
+data_global/
+local_optimization/
+models/
+logs/
+visualizer_prototype/tiles
+
+#dependencies
+#node-modules for the Point cloud: run npm install @cosmos.gl/graph
+node_modules/
+
+.svelte-kit/
+.svelte-kit/ambient.d.ts
+.svelte-kit/non-ambient.d.ts

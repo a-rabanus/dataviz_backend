@@ -1,0 +1,2982 @@
+[
+  {
+    "name": "Lagos, Lagos Island, Lagos, 100242, Nigeria",
+    "search_term": "Lagos, Nigeria",
+    "bbox": {
+      "west": 3.2341795,
+      "south": 6.2950575,
+      "east": 3.5541795,
+      "north": 6.6150575
+    }
+  },
+  {
+    "name": "القاهرة, مصر",
+    "search_term": "Cairo, Egypt",
+    "bbox": {
+      "west": 31.2200331,
+      "south": 29.7483062,
+      "east": 31.9090054,
+      "north": 30.3209168
+    }
+  },
+  {
+    "name": "Kinshasa, République démocratique du Congo",
+    "search_term": "Kinshasa, DR Congo",
+    "bbox": {
+      "west": 15.1270621,
+      "south": -5.0325362,
+      "east": 16.5341234,
+      "north": -3.9276112
+    }
+  },
+  {
+    "name": "Johannesburg, City of Johannesburg Metropolitan Municipality, Gauteng, 2001, South Africa",
+    "search_term": "Johannesburg, South Africa",
+    "bbox": {
+      "west": 27.889722,
+      "south": -26.365,
+      "east": 28.209722,
+      "north": -26.045
+    }
+  },
+  {
+    "name": "Luanda, Município de Luanda, Luanda, Angola",
+    "search_term": "Luanda, Angola",
+    "bbox": {
+      "west": 13.1732251,
+      "south": -8.9208267,
+      "east": 13.3108619,
+      "north": -8.759227
+    }
+  },
+  {
+    "name": "الخرطوم, السودان",
+    "search_term": "Khartoum, Sudan",
+    "bbox": {
+      "west": 32.4591493,
+      "south": 15.3876532,
+      "east": 32.7122581,
+      "north": 15.6168028
+    }
+  },
+  {
+    "name": "Abidjan, Côte d’Ivoire",
+    "search_term": "Abidjan, Côte d'Ivoire",
+    "bbox": {
+      "west": -4.176107,
+      "south": 5.160357,
+      "east": -3.856107,
+      "north": 5.480357
+    }
+  },
+  {
+    "name": "Nairobi, Kenya",
+    "search_term": "Nairobi, Kenya",
+    "bbox": {
+      "west": 36.6647016,
+      "south": -1.4448822,
+      "east": 37.1048735,
+      "north": -1.1606749
+    }
+  },
+  {
+    "name": "Accra, Korle-Klottey Municipal District, Greater Accra Region, Ghana",
+    "search_term": "Accra, Ghana",
+    "bbox": {
+      "west": -0.2841318,
+      "south": 5.5171908,
+      "east": -0.0548565,
+      "north": 5.6673682
+    }
+  },
+  {
+    "name": "Dar es-Salaam, Coastal Zone, Tanzania",
+    "search_term": "Dar es Salaam, Tanzania",
+    "bbox": {
+      "west": 39.0070295,
+      "south": -7.1868448,
+      "east": 39.9280466,
+      "north": -6.5661971
+    }
+  },
+  {
+    "name": "الإسكندرية, 21519, مصر",
+    "search_term": "Alexandria, Egypt",
+    "bbox": {
+      "west": 29.7351716,
+      "south": 31.0391806,
+      "east": 30.0551716,
+      "north": 31.3591806
+    }
+  },
+  {
+    "name": "Bamako, Mali",
+    "search_term": "Bamako, Mali",
+    "bbox": {
+      "west": -8.07382,
+      "south": 12.5113254,
+      "east": -7.9005664,
+      "north": 12.7136871
+    }
+  },
+  {
+    "name": "Kano, Yakasai, Kano Municipal, Kano, 700271, Nigeria",
+    "search_term": "Kano, Nigeria",
+    "bbox": {
+      "west": 8.3619738,
+      "south": 11.8339978,
+      "east": 8.6819738,
+      "north": 12.1539978
+    }
+  },
+  {
+    "name": "Cape Town, City of Cape Town, Western Cape, 8001, South Africa",
+    "search_term": "Cape Town, South Africa",
+    "bbox": {
+      "west": 18.2572197,
+      "south": -34.0888301,
+      "east": 18.5772197,
+      "north": -33.7688301
+    }
+  },
+  {
+    "name": "አዲስ አበባ / Addis Ababa, Arada, አዲስ አበባ Addis Ababa أديس أبابا, አዲስ አበባ أديس أبابا, 3578, ኢትዮጵያ إثيوبيا",
+    "search_term": "Addis Ababa, Ethiopia",
+    "bbox": {
+      "west": 38.5924127,
+      "south": 8.8758287,
+      "east": 38.9124127,
+      "north": 9.1958287
+    }
+  },
+  {
+    "name": "الجيزة, 12524, مصر",
+    "search_term": "Giza, Egypt",
+    "bbox": {
+      "west": 31.0518063,
+      "south": 29.8270753,
+      "east": 31.3718063,
+      "north": 30.1470753
+    }
+  },
+  {
+    "name": "Casablanca ⵜⴰⴷⴷⴰⵔⵜ ⵜⵓⵎⵍⵉⵍⵜ الدار البيضاء, Pachalik de Casablanca باشوية الدار البيضاء, Préfecture de Casablanca عمالة الدار البيضاء, Casablanca-Settat ⵜⴰⴷⴷⴰⵔⵜ ⵜⵓⵎⵍⵉⵍⵜ-ⵙⵟⵟⴰⵜ الدار البيضاء-سطات, Maroc ⵍⵎⵖⵔⵉⴱ المغرب",
+    "search_term": "Casablanca, Morocco",
+    "bbox": {
+      "west": -7.751238,
+      "south": 33.493342,
+      "east": -7.4574165,
+      "north": 33.6409103
+    }
+  },
+  {
+    "name": "Alger ⴷⵣⴰⵢⴻⵔ الجزائر, Alger-Centre, Daïra Sidi M'Hamed, Alger, 16007, Algérie ⵍⵣⵣⴰⵢⴻⵔ الجزائر",
+    "search_term": "Algiers, Algeria",
+    "bbox": {
+      "west": 2.8988445,
+      "south": 36.6129333,
+      "east": 3.2188445,
+      "north": 36.9329333
+    }
+  },
+  {
+    "name": "Kampala Capital City, Kampala, Central Region, Uganda",
+    "search_term": "Kampala, Uganda",
+    "bbox": {
+      "west": 32.5098753,
+      "south": 0.2143285,
+      "east": 32.6687413,
+      "north": 0.4057676
+    }
+  },
+  {
+    "name": "Dakar, Région de Dakar, Sénégal",
+    "search_term": "Dakar, Senegal",
+    "bbox": {
+      "west": -17.5490249,
+      "south": 14.646453,
+      "east": -17.3966032,
+      "north": 14.7966431
+    }
+  },
+  {
+    "name": "City of Ekurhuleni Metropolitan Municipality, Gauteng, South Africa",
+    "search_term": "Ekurhuleni, South Africa",
+    "bbox": {
+      "west": 28.06561,
+      "south": -26.4655795,
+      "east": 28.52715,
+      "north": -25.9033796
+    }
+  },
+  {
+    "name": "Communauté urbaine de Yaoundé, Mfoundi, Centre, Cameroun",
+    "search_term": "Yaoundé, Cameroon",
+    "bbox": {
+      "west": 11.4111836,
+      "south": 3.7134029,
+      "east": 11.5748061,
+      "north": 3.9691958
+    }
+  },
+  {
+    "name": "Durban, eThekwini Metropolitan Municipality, KwaZulu-Natal, 4057, South Africa",
+    "search_term": "Durban, South Africa",
+    "bbox": {
+      "west": 30.849909,
+      "south": -30.021825,
+      "east": 31.169909,
+      "north": -29.701825
+    }
+  },
+  {
+    "name": "Douala, Douala II, Communauté urbaine de Douala, Wouri, Littoral, Cameroun",
+    "search_term": "Douala, Cameroon",
+    "bbox": {
+      "west": 9.5462018,
+      "south": 3.8829389,
+      "east": 9.8662018,
+      "north": 4.2029389
+    }
+  },
+  {
+    "name": "Ouagadougou, Kadiogo, Centre, Burkina Faso",
+    "search_term": "Ouagadougou, Burkina Faso",
+    "bbox": {
+      "west": -1.6870944,
+      "south": 12.2081873,
+      "east": -1.3670944,
+      "north": 12.5281873
+    }
+  },
+  {
+    "name": "Ìbàdàn, Ibadan South West, Oyo, 234102, Nigeria",
+    "search_term": "Ibadan, Nigeria",
+    "bbox": {
+      "west": 3.7369928,
+      "south": 7.2186064,
+      "east": 4.0569928,
+      "north": 7.5386064
+    }
+  },
+  {
+    "name": "Antananarivo, Analamanga, Province d’Antananarivo, 101, Madagasikara / Madagascar",
+    "search_term": "Antananarivo, Madagascar",
+    "bbox": {
+      "west": 47.3655809,
+      "south": -19.0700122,
+      "east": 47.6855809,
+      "north": -18.7500122
+    }
+  },
+  {
+    "name": "Abuja, Municipal Area Council, Federal Capital Territory, 223140, Nigeria",
+    "search_term": "Abuja, Nigeria",
+    "bbox": {
+      "west": 7.3292974,
+      "south": 8.9043305,
+      "east": 7.6492974,
+      "north": 9.2243305
+    }
+  },
+  {
+    "name": "Lusaka, Lusaka District, Lusaka Province, 10101, Zambia",
+    "search_term": "Lusaka, Zambia",
+    "bbox": {
+      "west": 28.1218414,
+      "south": -15.5763395,
+      "east": 28.4418414,
+      "north": -15.2563395
+    }
+  },
+  {
+    "name": "Conakry, Guinée",
+    "search_term": "Conakry, Guinea",
+    "bbox": {
+      "west": -13.8402897,
+      "south": 9.4321917,
+      "east": -13.4738187,
+      "north": 9.7533673
+    }
+  },
+  {
+    "name": "Kumasi, Kumasi Metropolitan District, Ashanti Region, Ghana",
+    "search_term": "Kumasi, Ghana",
+    "bbox": {
+      "west": -1.7833086,
+      "south": 6.5385605,
+      "east": -1.4633086,
+      "north": 6.8585605
+    }
+  },
+  {
+    "name": "Lubumbashi, Ville de Lubumbashi, Haut-Katanga, République démocratique du Congo",
+    "search_term": "Lubumbashi, DR Congo",
+    "bbox": {
+      "west": 27.4113823,
+      "south": -11.6987625,
+      "east": 27.4942483,
+      "north": -11.6059633
+    }
+  },
+  {
+    "name": "امدرمان, الخرطوم, 14417, السودان",
+    "search_term": "Omdurman, Sudan",
+    "bbox": {
+      "west": 32.3018645,
+      "south": 15.4770083,
+      "east": 32.5326633,
+      "north": 15.7538452
+    }
+  },
+  {
+    "name": "Pretoria, City of Tshwane Metropolitan Municipality, Gauteng, 0142, South Africa",
+    "search_term": "Pretoria, South Africa",
+    "bbox": {
+      "west": 28.0279101,
+      "south": -25.9059277,
+      "east": 28.3479101,
+      "north": -25.5859277
+    }
+  },
+  {
+    "name": "تونس",
+    "search_term": "Tunis, Tunisia",
+    "bbox": {
+      "west": 7.5219807,
+      "south": 30.229061,
+      "east": 11.8801133,
+      "north": 37.7612052
+    }
+  },
+  {
+    "name": "Harare Province, Zimbabwe",
+    "search_term": "Harare, Zimbabwe",
+    "bbox": {
+      "west": 30.877425,
+      "south": -18.050993,
+      "east": 31.2214508,
+      "north": -17.6571646
+    }
+  },
+  {
+    "name": "Lomé, Région Maritime, Togo",
+    "search_term": "Lomé, Togo",
+    "bbox": {
+      "west": 1.1754424,
+      "south": 6.1123604,
+      "east": 1.3057378,
+      "north": 6.2041066
+    }
+  },
+  {
+    "name": "Cidade de Maputo, Zona Sul, Moçambique",
+    "search_term": "Maputo, Mozambique",
+    "bbox": {
+      "west": 32.4399695,
+      "south": -26.0900247,
+      "east": 32.9936741,
+      "north": -25.8117064
+    }
+  },
+  {
+    "name": "Mbuji-Mayi, Dibindi, Ville de Mbujimayi, Kasaï-Oriental, République démocratique du Congo",
+    "search_term": "Mbuji-Mayi, DR Congo",
+    "bbox": {
+      "west": 23.4398111,
+      "south": -6.2858942,
+      "east": 23.7598111,
+      "north": -5.9658942
+    }
+  },
+  {
+    "name": "Brazzaville (commune), Brazzaville (département), Congo",
+    "search_term": "Brazzaville, Republic of the Congo",
+    "bbox": {
+      "west": 15.1389502,
+      "south": -4.3810505,
+      "east": 15.3247981,
+      "north": -4.0967732
+    }
+  },
+  {
+    "name": "Port-Harcourt, Rivers, Nigeria",
+    "search_term": "Port Harcourt, Nigeria",
+    "bbox": {
+      "west": 6.940325,
+      "south": 4.713169,
+      "east": 7.0781333,
+      "north": 4.8240652
+    }
+  },
+  {
+    "name": "Muqdisho مقديشو, Hamar Weyne حي حمروين, Banaadir بنادر, BN 09010, Soomaaliya الصومال",
+    "search_term": "Mogadishu, Somalia",
+    "bbox": {
+      "west": 45.1819183,
+      "south": 1.8749312,
+      "east": 45.5019183,
+      "north": 2.1949312
+    }
+  },
+  {
+    "name": "Cotonou, Littoral, Bénin",
+    "search_term": "Cotonou, Benin",
+    "bbox": {
+      "west": 2.3545745,
+      "south": 6.337276,
+      "east": 2.4958483,
+      "north": 6.3992392
+    }
+  },
+  {
+    "name": "Rabat ⵔⴱⴰⵟ الرباط, باشوية الرباط, Préfecture de Rabat عمالة الرباط, Rabat-Salé-Kénitra ⵔⴱⴰⵟ-ⵙⵍⴰ-ⵇⵏⵉⵟⵔⴰ الرباط-سلا-القنيطرة, Maroc ⵍⵎⵖⵔⵉⴱ المغرب",
+    "search_term": "Rabat, Morocco",
+    "bbox": {
+      "west": -6.9305776,
+      "south": 33.8964011,
+      "east": -6.7614635,
+      "north": 34.0378472
+    }
+  },
+  {
+    "name": "Kaduna, Kabala, Kaduna North, Kaduna, 800211, Nigeria",
+    "search_term": "Kaduna, Nigeria",
+    "bbox": {
+      "west": 7.2759863,
+      "south": 10.3582899,
+      "east": 7.5959863,
+      "north": 10.6782899
+    }
+  },
+  {
+    "name": "Umujyi wa Kigali, Rwanda",
+    "search_term": "Kigali, Rwanda",
+    "bbox": {
+      "west": 29.9795259,
+      "south": -2.0798215,
+      "east": 30.2798704,
+      "north": -1.7795809
+    }
+  },
+  {
+    "name": "N'Djaména انجمينا, Tchad تشاد",
+    "search_term": "N'Djamena, Chad",
+    "bbox": {
+      "west": 14.8852944,
+      "south": 12.0539646,
+      "east": 15.1825726,
+      "north": 12.2534873
+    }
+  },
+  {
+    "name": "Monrovia, Greater Monrovia, Montserrado County, Liberia",
+    "search_term": "Monrovia, Liberia",
+    "bbox": {
+      "west": -10.957788,
+      "south": 6.168034,
+      "east": -10.637788,
+      "north": 6.488034
+    }
+  },
+  {
+    "name": "طرابلس, ليبيا",
+    "search_term": "Tripoli, Libya",
+    "bbox": {
+      "west": 13.0657395,
+      "south": 32.6253078,
+      "east": 13.59814,
+      "north": 32.9212205
+    }
+  },
+  {
+    "name": "Matola, Maputo, Zona Sul, Moçambique",
+    "search_term": "Matola, Mozambique",
+    "bbox": {
+      "west": 32.4007541,
+      "south": -25.9940871,
+      "east": 32.5861565,
+      "north": -25.6936495
+    }
+  },
+  {
+    "name": "東京都, 日本",
+    "search_term": "Tokyo, Japan",
+    "bbox": {
+      "west": 135.8536855,
+      "south": 20.2145811,
+      "east": 154.205541,
+      "north": 35.8984245
+    }
+  },
+  {
+    "name": "Delhi, India",
+    "search_term": "Delhi, India",
+    "bbox": {
+      "west": 76.8388351,
+      "south": 28.4046285,
+      "east": 77.3452524,
+      "north": 28.8834464
+    }
+  },
+  {
+    "name": "上海市, 中国",
+    "search_term": "Shanghai, China",
+    "bbox": {
+      "west": 118.6001842,
+      "south": 30.6693052,
+      "east": 123.3342088,
+      "north": 33.4431436
+    }
+  },
+  {
+    "name": "Mumbai, Mumbai Suburban, Maharashtra, India",
+    "search_term": "Mumbai, India",
+    "bbox": {
+      "west": 72.776333,
+      "south": 18.8939566,
+      "east": 72.9817485,
+      "north": 19.2694771
+    }
+  },
+  {
+    "name": "北京市, 中国",
+    "search_term": "Beijing, China",
+    "bbox": {
+      "west": 115.4172086,
+      "south": 39.1707096,
+      "east": 117.7371243,
+      "north": 41.0595584
+    }
+  },
+  {
+    "name": "ঢাকা, ঢাকা মহানগর, ঢাকা জেলা, ঢাকা বিভাগ, 1215, বাংলাদেশ",
+    "search_term": "Dhaka, Bangladesh",
+    "bbox": {
+      "west": 90.2290144,
+      "south": 23.6043863,
+      "east": 90.5490144,
+      "north": 23.9243863
+    }
+  },
+  {
+    "name": "大阪市, 大阪府, 日本",
+    "search_term": "Osaka, Japan",
+    "bbox": {
+      "west": 135.3099784,
+      "south": 34.586154,
+      "east": 135.5991702,
+      "north": 34.768849
+    }
+  },
+  {
+    "name": "کراچی ڈویژن, سندھ, پاکستان",
+    "search_term": "Karachi, Pakistan",
+    "bbox": {
+      "west": 66.2862312,
+      "south": 24.4273517,
+      "east": 67.5827753,
+      "north": 25.676796
+    }
+  },
+  {
+    "name": "重庆市, 中国",
+    "search_term": "Chongqing, China",
+    "bbox": {
+      "west": 105.2868306,
+      "south": 28.161744,
+      "east": 110.1944429,
+      "north": 32.2036631
+    }
+  },
+  {
+    "name": "Kolkata, West Bengal, India",
+    "search_term": "Kolkata, India",
+    "bbox": {
+      "west": 88.233628,
+      "south": 22.4520292,
+      "east": 88.4610776,
+      "north": 22.6188255
+    }
+  },
+  {
+    "name": "Manila, Capital District, Metro Manila, Philippines",
+    "search_term": "Manila, Philippines",
+    "bbox": {
+      "west": 120.7917034,
+      "south": 14.5508249,
+      "east": 121.0261672,
+      "north": 14.6395473
+    }
+  },
+  {
+    "name": "广州市, 广东省, 中国",
+    "search_term": "Guangzhou, China",
+    "bbox": {
+      "west": 112.9523727,
+      "south": 22.5607701,
+      "east": 114.055299,
+      "north": 23.935994
+    }
+  },
+  {
+    "name": "深圳市, 广东省, 中国",
+    "search_term": "Shenzhen, China",
+    "bbox": {
+      "west": 113.6793565,
+      "south": 21.8213642,
+      "east": 115.3890648,
+      "north": 23.016534
+    }
+  },
+  {
+    "name": "Daerah Khusus ibukota Jakarta, Jawa, Indonesia",
+    "search_term": "Jakarta, Indonesia",
+    "bbox": {
+      "west": 106.3146732,
+      "south": -6.3744575,
+      "east": 106.973975,
+      "north": -4.9993635
+    }
+  },
+  {
+    "name": "서울특별시, 대한민국",
+    "search_term": "Seoul, South Korea",
+    "bbox": {
+      "west": 126.7644328,
+      "south": 37.4285424,
+      "east": 127.1837702,
+      "north": 37.7014794
+    }
+  },
+  {
+    "name": "成都市, 四川省, 中国",
+    "search_term": "Chengdu, China",
+    "bbox": {
+      "west": 102.989623,
+      "south": 30.0916339,
+      "east": 104.8948475,
+      "north": 31.4370968
+    }
+  },
+  {
+    "name": "天津市, 中国",
+    "search_term": "Tianjin, China",
+    "bbox": {
+      "west": 113.7320008,
+      "south": 36.5714411,
+      "east": 118.0586744,
+      "north": 40.2520111
+    }
+  },
+  {
+    "name": "Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, India",
+    "search_term": "Bangalore, India",
+    "bbox": {
+      "west": 77.4600507,
+      "south": 12.8336251,
+      "east": 77.7843613,
+      "north": 13.1426598
+    }
+  },
+  {
+    "name": "南京市, 江苏省, 中国",
+    "search_term": "Nanjing, China",
+    "bbox": {
+      "west": 118.3345905,
+      "south": 31.2267477,
+      "east": 119.2395068,
+      "north": 32.615778
+    }
+  },
+  {
+    "name": "لاہور, تحصیل لاہور شہر, ضلع لاہور, لاہور ڈویژن, پنجاب, 54500, پاکستان",
+    "search_term": "Lahore, Pakistan",
+    "bbox": {
+      "west": 74.1541829,
+      "south": 31.4056822,
+      "east": 74.4741829,
+      "north": 31.7256822
+    }
+  },
+  {
+    "name": "Thành phố Hồ Chí Minh, Việt Nam",
+    "search_term": "Ho Chi Minh City, Vietnam",
+    "bbox": {
+      "west": 105.9769387,
+      "south": 8.3456879,
+      "east": 108.4311207,
+      "north": 11.5015885
+    }
+  },
+  {
+    "name": "Chennai Corporation, Chennai, Tamil Nadu, India",
+    "search_term": "Chennai, India",
+    "bbox": {
+      "west": 80.1401875,
+      "south": 12.8519771,
+      "east": 80.3328982,
+      "north": 13.235158
+    }
+  },
+  {
+    "name": "武汉市, 湖北省, 中国",
+    "search_term": "Wuhan, China",
+    "bbox": {
+      "west": 113.696653,
+      "south": 29.9719559,
+      "east": 115.076933,
+      "north": 31.362241
+    }
+  },
+  {
+    "name": "กรุงเทพมหานคร, ประเทศไทย",
+    "search_term": "Bangkok, Thailand",
+    "bbox": {
+      "west": 100.3278772,
+      "south": 13.2191019,
+      "east": 100.9386039,
+      "north": 13.9551693
+    }
+  },
+  {
+    "name": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India",
+    "search_term": "Hyderabad, India",
+    "bbox": {
+      "west": 78.2387067,
+      "south": 17.2916377,
+      "east": 78.6223912,
+      "north": 17.5608321
+    }
+  },
+  {
+    "name": "香港 Hong Kong, 中国",
+    "search_term": "Hong Kong, China",
+    "bbox": {
+      "west": 113.8172408,
+      "south": 22.1367246,
+      "east": 114.5024867,
+      "north": 22.5683333
+    }
+  },
+  {
+    "name": "شهر تهران, بخش مرکزی شهرستان تهران, شهرستان تهران, استان تهران, ایران",
+    "search_term": "Tehran, Iran",
+    "bbox": {
+      "west": 51.0892219,
+      "south": 35.5682071,
+      "east": 51.6063007,
+      "north": 35.8284702
+    }
+  },
+  {
+    "name": "西安市, 陕西省, 中国",
+    "search_term": "Xi'an, China",
+    "bbox": {
+      "west": 107.655623,
+      "south": 33.695219,
+      "east": 109.7914365,
+      "north": 34.7459524
+    }
+  },
+  {
+    "name": "Ahmedabad, Gujarat, 380001, India",
+    "search_term": "Ahmedabad, India",
+    "bbox": {
+      "west": 72.4200568,
+      "south": 22.8615374,
+      "east": 72.7400568,
+      "north": 23.1815374
+    }
+  },
+  {
+    "name": "Kuala Lumpur, Malaysia",
+    "search_term": "Kuala Lumpur, Malaysia",
+    "bbox": {
+      "west": 101.615139,
+      "south": 3.0333979,
+      "east": 101.7584948,
+      "north": 3.2445538
+    }
+  },
+  {
+    "name": "Singapore",
+    "search_term": "Singapore, Singapore",
+    "bbox": {
+      "west": 103.5655616,
+      "south": 1.1265744,
+      "east": 104.5716696,
+      "north": 1.5143183
+    }
+  },
+  {
+    "name": "苏州市, 江苏省, 中国",
+    "search_term": "Suzhou, China",
+    "bbox": {
+      "west": 119.9162087,
+      "south": 30.7603342,
+      "east": 121.382253,
+      "north": 32.0457785
+    }
+  },
+  {
+    "name": "杭州市, 浙江省, 中国",
+    "search_term": "Hangzhou, China",
+    "bbox": {
+      "west": 118.3396948,
+      "south": 29.1888286,
+      "east": 120.7254851,
+      "north": 30.5648514
+    }
+  },
+  {
+    "name": "منطقة الرياض, السعودية",
+    "search_term": "Riyadh, Saudi Arabia",
+    "bbox": {
+      "west": 41.68113,
+      "south": 19.2083336,
+      "east": 48.2582,
+      "north": 27.7020999
+    }
+  },
+  {
+    "name": "哈尔滨市, 香坊区, 黑龙江省, 中国",
+    "search_term": "Harbin, China",
+    "bbox": {
+      "west": 125.6782545,
+      "south": 44.0599824,
+      "east": 130.2335015,
+      "north": 46.6718214
+    }
+  },
+  {
+    "name": "بغداد, بلدية المنطقة الخضراء, محافظة بغداد, العراق",
+    "search_term": "Baghdad, Iraq",
+    "bbox": {
+      "west": 44.1846152,
+      "south": 33.1797569,
+      "east": 44.5699963,
+      "north": 33.4868251
+    }
+  },
+  {
+    "name": "Pune City, Pune, Maharashtra, India",
+    "search_term": "Pune, India",
+    "bbox": {
+      "west": 73.7498473,
+      "south": 18.429497,
+      "east": 74.020214,
+      "north": 18.6208699
+    }
+  },
+  {
+    "name": "青岛市, 山东省, 266000, 中国",
+    "search_term": "Qingdao, China",
+    "bbox": {
+      "west": 119.509216,
+      "south": 35.2175758,
+      "east": 121.5698976,
+      "north": 37.148465
+    }
+  },
+  {
+    "name": "大连市, 辽宁省, 中国",
+    "search_term": "Dalian, China",
+    "bbox": {
+      "west": 120.9718963,
+      "south": 38.5718326,
+      "east": 123.5152509,
+      "north": 40.2039986
+    }
+  },
+  {
+    "name": "东莞市, 广东省, 中国",
+    "search_term": "Dongguan, China",
+    "bbox": {
+      "west": 113.5164763,
+      "south": 22.6564988,
+      "east": 114.25547,
+      "north": 23.1449285
+    }
+  },
+  {
+    "name": "Surat, Katargam Taluka, Surat, Gujarat, 395008, India",
+    "search_term": "Surat, India",
+    "bbox": {
+      "west": 72.6717058,
+      "south": 21.0494892,
+      "east": 72.9917058,
+      "north": 21.3694892
+    }
+  },
+  {
+    "name": "ရန်ကုန်မြို့, ရန်ကုန်တိုင်းဒေသကြီး, မြန်မာ",
+    "search_term": "Yangon, Myanmar",
+    "bbox": {
+      "west": 95.9947586,
+      "south": 16.5919743,
+      "east": 96.3688068,
+      "north": 17.0907467
+    }
+  },
+  {
+    "name": "沈阳市, 辽宁省, 中国",
+    "search_term": "Shenyang, China",
+    "bbox": {
+      "west": 122.4167356,
+      "south": 41.1976943,
+      "east": 123.8085417,
+      "north": 43.0402961
+    }
+  },
+  {
+    "name": "佛山市, 广东省, 中国",
+    "search_term": "Foshan, China",
+    "bbox": {
+      "west": 112.3854945,
+      "south": 22.6452239,
+      "east": 113.3879656,
+      "north": 23.576193
+    }
+  },
+  {
+    "name": "郑州市, 河南省, 中国",
+    "search_term": "Zhengzhou, China",
+    "bbox": {
+      "west": 112.7142104,
+      "south": 34.2629201,
+      "east": 114.2054503,
+      "north": 34.9877486
+    }
+  },
+  {
+    "name": "汕头市, 广东省, 中国",
+    "search_term": "Shantou, China",
+    "bbox": {
+      "west": 116.2400438,
+      "south": 22.8329423,
+      "east": 117.531995,
+      "north": 23.6484463
+    }
+  },
+  {
+    "name": "长沙市, 湖南省, 中国",
+    "search_term": "Changsha, China",
+    "bbox": {
+      "west": 111.8908381,
+      "south": 27.8512095,
+      "east": 114.2560358,
+      "north": 28.6644154
+    }
+  },
+  {
+    "name": "乌鲁木齐市 ئۈرۈمچى, 新疆维吾尔自治区 شىنجاڭ ئۇيغۇر ئاپتونوم رايونی, 中国",
+    "search_term": "Urumqi, China",
+    "bbox": {
+      "west": 86.7939662,
+      "south": 42.9220135,
+      "east": 88.9720528,
+      "north": 45.0006638
+    }
+  },
+  {
+    "name": "昆明市, 云南省, 中国",
+    "search_term": "Kunming, China",
+    "bbox": {
+      "west": 102.1679807,
+      "south": 24.388896,
+      "east": 103.6689663,
+      "north": 26.548485
+    }
+  },
+  {
+    "name": "Москва, Центральный федеральный округ, Россия",
+    "search_term": "Moscow, Russia",
+    "bbox": {
+      "west": 36.8031012,
+      "south": 55.1421745,
+      "east": 37.9674277,
+      "north": 56.0212238
+    }
+  },
+  {
+    "name": "London, Greater London, England, United Kingdom",
+    "search_term": "London, United Kingdom",
+    "bbox": {
+      "west": -0.5103751,
+      "south": 51.2867601,
+      "east": 0.3340155,
+      "north": 51.6918741
+    }
+  },
+  {
+    "name": "Санкт-Петербург, Северо-Западный федеральный округ, Россия",
+    "search_term": "Saint Petersburg, Russia",
+    "bbox": {
+      "west": 29.4257576,
+      "south": 59.6337832,
+      "east": 30.7594934,
+      "north": 60.2448369
+    }
+  },
+  {
+    "name": "Berlin, Deutschland",
+    "search_term": "Berlin, Germany",
+    "bbox": {
+      "west": 13.088345,
+      "south": 52.3382448,
+      "east": 13.7611609,
+      "north": 52.6755087
+    }
+  },
+  {
+    "name": "Madrid, Comunidad de Madrid, España",
+    "search_term": "Madrid, Spain",
+    "bbox": {
+      "west": -3.8889539,
+      "south": 40.3119774,
+      "east": -3.5179163,
+      "north": 40.6437293
+    }
+  },
+  {
+    "name": "Київ, Україна",
+    "search_term": "Kyiv, Ukraine",
+    "bbox": {
+      "west": 30.2361453,
+      "south": 50.2132422,
+      "east": 30.8263593,
+      "north": 50.5908142
+    }
+  },
+  {
+    "name": "Roma, Roma Capitale, Lazio, Italia",
+    "search_term": "Rome, Italy",
+    "bbox": {
+      "west": 12.2344669,
+      "south": 41.6556417,
+      "east": 12.8557603,
+      "north": 42.1410285
+    }
+  },
+  {
+    "name": "Paris, Île-de-France, France métropolitaine, France",
+    "search_term": "Paris, France",
+    "bbox": {
+      "west": 2.224122,
+      "south": 48.8155755,
+      "east": 2.4697602,
+      "north": 48.902156
+    }
+  },
+  {
+    "name": "București, România",
+    "search_term": "Bucharest, Romania",
+    "bbox": {
+      "west": 25.9666745,
+      "south": 44.3342466,
+      "east": 26.2255768,
+      "north": 44.5413964
+    }
+  },
+  {
+    "name": "Мінск, Беларусь",
+    "search_term": "Minsk, Belarus",
+    "bbox": {
+      "west": 27.3740176,
+      "south": 53.793847,
+      "east": 28.0799469,
+      "north": 53.9717897
+    }
+  },
+  {
+    "name": "Wien, Österreich",
+    "search_term": "Vienna, Austria",
+    "bbox": {
+      "west": 16.181831,
+      "south": 48.1179069,
+      "east": 16.5775132,
+      "north": 48.3226679
+    }
+  },
+  {
+    "name": "Hamburg, Deutschland",
+    "search_term": "Hamburg, Germany",
+    "bbox": {
+      "west": 8.1044993,
+      "south": 53.3951118,
+      "east": 10.3252805,
+      "north": 54.02765
+    }
+  },
+  {
+    "name": "Warszawa, województwo mazowieckie, Polska",
+    "search_term": "Warsaw, Poland",
+    "bbox": {
+      "west": 20.8516882,
+      "south": 52.0978497,
+      "east": 21.2711512,
+      "north": 52.3681531
+    }
+  },
+  {
+    "name": "Budapest, Közép-Magyarország, Magyarország",
+    "search_term": "Budapest, Hungary",
+    "bbox": {
+      "west": 18.9251057,
+      "south": 47.3496899,
+      "east": 19.3349258,
+      "north": 47.6131468
+    }
+  },
+  {
+    "name": "Barcelona, Barcelonès, Barcelona, Catalunya, España",
+    "search_term": "Barcelona, Spain",
+    "bbox": {
+      "west": 2.0524977,
+      "south": 41.3170353,
+      "east": 2.2283555,
+      "north": 41.4679135
+    }
+  },
+  {
+    "name": "München, Bayern, Deutschland",
+    "search_term": "Munich, Germany",
+    "bbox": {
+      "west": 11.360777,
+      "south": 48.0616244,
+      "east": 11.7229099,
+      "north": 48.2481162
+    }
+  },
+  {
+    "name": "Харків, Харківська міська громада, Харківський район, Харківська область, Україна",
+    "search_term": "Kharkiv, Ukraine",
+    "bbox": {
+      "west": 36.1055541,
+      "south": 49.8784822,
+      "east": 36.4554864,
+      "north": 50.1047533
+    }
+  },
+  {
+    "name": "Milano, Lombardia, Italia",
+    "search_term": "Milan, Italy",
+    "bbox": {
+      "west": 9.0408867,
+      "south": 45.3867381,
+      "east": 9.2781103,
+      "north": 45.5358482
+    }
+  },
+  {
+    "name": "Београд, Град Београд, Централна Србија, Србија",
+    "search_term": "Belgrade, Serbia",
+    "bbox": {
+      "west": 20.2213764,
+      "south": 44.6880459,
+      "east": 20.6232109,
+      "north": 44.9426876
+    }
+  },
+  {
+    "name": "Hlavní město Praha, Praha, Česko",
+    "search_term": "Prague, Czechia",
+    "bbox": {
+      "west": 14.2244355,
+      "south": 49.9419006,
+      "east": 14.7067867,
+      "north": 50.1774301
+    }
+  },
+  {
+    "name": "Казань, городской округ Казань, Татарстан, Приволжский федеральный округ, Россия",
+    "search_term": "Kazan, Russia",
+    "bbox": {
+      "west": 48.8205846,
+      "south": 55.6031357,
+      "east": 49.3812469,
+      "north": 55.930739
+    }
+  },
+  {
+    "name": "София, Средец, Столична, София-град, България",
+    "search_term": "Sofia, Bulgaria",
+    "bbox": {
+      "west": 23.167997,
+      "south": 42.5579851,
+      "east": 23.6215817,
+      "north": 42.864302
+    }
+  },
+  {
+    "name": "городской округ Нижний Новгород, Нижегородская область, Приволжский федеральный округ, Россия",
+    "search_term": "Nizhny Novgorod, Russia",
+    "bbox": {
+      "west": 43.5475371,
+      "south": 56.132015,
+      "east": 44.1547721,
+      "north": 56.4220451
+    }
+  },
+  {
+    "name": "Екатеринбург, городской округ Екатеринбург, Свердловская область, Уральский федеральный округ, Россия",
+    "search_term": "Yekaterinburg, Russia",
+    "bbox": {
+      "west": 60.0070815,
+      "south": 56.5937449,
+      "east": 60.9432814,
+      "north": 56.9826914
+    }
+  },
+  {
+    "name": "Самара, городской округ Самара, Самарская область, Приволжский федеральный округ, 443028, Россия",
+    "search_term": "Samara, Russia",
+    "bbox": {
+      "west": 49.7313889,
+      "south": 53.0919014,
+      "east": 50.3903893,
+      "north": 53.5509321
+    }
+  },
+  {
+    "name": "Одеса, Одеська міська громада, Одеський район, Одеська область, Україна",
+    "search_term": "Odesa, Ukraine",
+    "bbox": {
+      "west": 30.6114013,
+      "south": 46.3426662,
+      "east": 30.8313753,
+      "north": 46.6291187
+    }
+  },
+  {
+    "name": "Birmingham, West Midlands, England, United Kingdom",
+    "search_term": "Birmingham, United Kingdom",
+    "bbox": {
+      "west": -2.0336486,
+      "south": 52.381053,
+      "east": -1.7288417,
+      "north": 52.6087058
+    }
+  },
+  {
+    "name": "Уфа, городской округ Уфа, Башкортостан, Приволжский федеральный округ, 450000, Россия",
+    "search_term": "Ufa, Russia",
+    "bbox": {
+      "west": 55.778613,
+      "south": 54.5007524,
+      "east": 56.2985557,
+      "north": 54.9600475
+    }
+  },
+  {
+    "name": "городской округ Ростов-на-Дону, Ростовская область, Россия",
+    "search_term": "Rostov-on-Don, Russia",
+    "bbox": {
+      "west": 39.4047313,
+      "south": 47.1533773,
+      "east": 39.8513903,
+      "north": 47.3687328
+    }
+  },
+  {
+    "name": "Köln, Nordrhein-Westfalen, Deutschland",
+    "search_term": "Cologne, Germany",
+    "bbox": {
+      "west": 6.7725303,
+      "south": 50.8304399,
+      "east": 7.162028,
+      "north": 51.0849743
+    }
+  },
+  {
+    "name": "городской округ Воронеж, Воронежская область, Центральный федеральный округ, Россия",
+    "search_term": "Voronezh, Russia",
+    "bbox": {
+      "west": 39.0132338,
+      "south": 51.4848657,
+      "east": 39.6589505,
+      "north": 51.9027698
+    }
+  },
+  {
+    "name": "Пермь, Пермский городской округ, Пермский край, Приволжский федеральный округ, Россия",
+    "search_term": "Perm, Russia",
+    "bbox": {
+      "west": 55.7989168,
+      "south": 57.8676726,
+      "east": 56.6566443,
+      "north": 58.1771542
+    }
+  },
+  {
+    "name": "Волгоград, городской округ Волгоград, Волгоградская область, Россия",
+    "search_term": "Volgograd, Russia",
+    "bbox": {
+      "west": 44.1087686,
+      "south": 48.4070531,
+      "east": 44.6874279,
+      "north": 48.8890717
+    }
+  },
+  {
+    "name": "Dnieper, Україна",
+    "search_term": "Dnipro, Ukraine",
+    "bbox": {
+      "west": 30.0209141,
+      "south": 46.4851356,
+      "east": 35.1967847,
+      "north": 55.8717014
+    }
+  },
+  {
+    "name": "Napoli, Campania, Italia",
+    "search_term": "Naples, Italy",
+    "bbox": {
+      "west": 14.1320999,
+      "south": 40.791193,
+      "east": 14.3537681,
+      "north": 40.916123
+    }
+  },
+  {
+    "name": "Красноярск, городской округ Красноярск, Красноярский край, Сибирский федеральный округ, 660000, Россия",
+    "search_term": "Krasnoyarsk, Russia",
+    "bbox": {
+      "west": 92.6275236,
+      "south": 55.9118405,
+      "east": 93.1684409,
+      "north": 56.1338167
+    }
+  },
+  {
+    "name": "Torino, Piemonte, Italia",
+    "search_term": "Turin, Italy",
+    "bbox": {
+      "west": 7.5778348,
+      "south": 45.0067924,
+      "east": 7.7733388,
+      "north": 45.1402175
+    }
+  },
+  {
+    "name": "Саратов, городской округ Саратов, Саратовская область, Приволжский федеральный округ, 410000, Россия",
+    "search_term": "Saratov, Russia",
+    "bbox": {
+      "west": 45.8053143,
+      "south": 51.3921102,
+      "east": 46.2097151,
+      "north": 51.6856159
+    }
+  },
+  {
+    "name": "Marseille, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, France métropolitaine, France",
+    "search_term": "Marseille, France",
+    "bbox": {
+      "west": 5.2286312,
+      "south": 43.1696228,
+      "east": 5.5324758,
+      "north": 43.3910329
+    }
+  },
+  {
+    "name": "Grad Zagreb, Hrvatska",
+    "search_term": "Zagreb, Croatia",
+    "bbox": {
+      "west": 15.7732052,
+      "south": 45.6139895,
+      "east": 16.2395548,
+      "north": 45.9691466
+    }
+  },
+  {
+    "name": "València, Comarca de València, València / Valencia, Comunitat Valenciana, España",
+    "search_term": "Valencia, Spain",
+    "bbox": {
+      "west": -0.4325512,
+      "south": 39.2784496,
+      "east": -0.2725205,
+      "north": 39.566609
+    }
+  },
+  {
+    "name": "Łódź, województwo łódzkie, Polska",
+    "search_term": "Łódź, Poland",
+    "bbox": {
+      "west": 19.3208636,
+      "south": 51.6861438,
+      "east": 19.6399456,
+      "north": 51.8598252
+    }
+  },
+  {
+    "name": "Kraków, województwo małopolskie, Polska",
+    "search_term": "Kraków, Poland",
+    "bbox": {
+      "west": 19.7922355,
+      "south": 49.9676668,
+      "east": 20.2173455,
+      "north": 50.1261338
+    }
+  },
+  {
+    "name": "Amsterdam, Noord-Holland, Nederland",
+    "search_term": "Amsterdam, Netherlands",
+    "bbox": {
+      "west": 4.7287776,
+      "south": 52.2781742,
+      "east": 5.0791622,
+      "north": 52.4310638
+    }
+  },
+  {
+    "name": "Αθήνα, Δήμος Αθηναίων, Περιφερειακή Ενότητα Κεντρικού Τομέα Αθηνών, Περιφέρεια Αττικής, Αποκεντρωμένη Διοίκηση Αττικής, 105 57, Ελλάς",
+    "search_term": "Athens, Greece",
+    "bbox": {
+      "west": 23.5748324,
+      "south": 37.8155648,
+      "east": 23.8948324,
+      "north": 38.1355648
+    }
+  },
+  {
+    "name": "Sevilla, Andalucía, España",
+    "search_term": "Seville, Spain",
+    "bbox": {
+      "west": -6.0329183,
+      "south": 37.3002036,
+      "east": -5.8191571,
+      "north": 37.4529579
+    }
+  },
+  {
+    "name": "Frankfurt am Main, Hessen, Deutschland",
+    "search_term": "Frankfurt, Germany",
+    "bbox": {
+      "west": 8.4727605,
+      "south": 50.0153529,
+      "east": 8.8004049,
+      "north": 50.2271424
+    }
+  },
+  {
+    "name": "Краснодар, городской округ Краснодар, Краснодарский край, 350000, Россия",
+    "search_term": "Krasnodar, Russia",
+    "bbox": {
+      "west": 38.8172396,
+      "south": 44.8751532,
+      "east": 39.1372396,
+      "north": 45.1951532
+    }
+  },
+  {
+    "name": "Zaragoza, Aragón, España",
+    "search_term": "Zaragoza, Spain",
+    "bbox": {
+      "west": -1.1737289,
+      "south": 41.4516625,
+      "east": -0.6803895,
+      "north": 41.9314873
+    }
+  },
+  {
+    "name": "Ciudad de México, México",
+    "search_term": "Mexico City, Mexico",
+    "bbox": {
+      "west": -99.3649242,
+      "south": 19.0487187,
+      "east": -98.9403028,
+      "north": 19.5927573
+    }
+  },
+  {
+    "name": "City of New York, New York, United States of America",
+    "search_term": "New York City, USA",
+    "bbox": {
+      "west": -74.258843,
+      "south": 40.476578,
+      "east": -73.700233,
+      "north": 40.91763
+    }
+  },
+  {
+    "name": "Los Angeles, Los Angeles County, California, United States of America",
+    "search_term": "Los Angeles, USA",
+    "bbox": {
+      "west": -118.6681798,
+      "south": 33.659541,
+      "east": -118.1552983,
+      "north": 34.337306
+    }
+  },
+  {
+    "name": "Toronto, Golden Horseshoe, Ontario, Canada",
+    "search_term": "Toronto, Canada",
+    "bbox": {
+      "west": -79.6392832,
+      "south": 43.5796082,
+      "east": -79.1132193,
+      "north": 43.8554425
+    }
+  },
+  {
+    "name": "Chicago, South Chicago Township, Cook County, Illinois, United States of America",
+    "search_term": "Chicago, USA",
+    "bbox": {
+      "west": -87.9400876,
+      "south": 41.644531,
+      "east": -87.5240812,
+      "north": 42.0230396
+    }
+  },
+  {
+    "name": "Houston, Harris County, Texas, United States of America",
+    "search_term": "Houston, USA",
+    "bbox": {
+      "west": -95.9097419,
+      "south": 29.5370705,
+      "east": -95.0120525,
+      "north": 30.1103506
+    }
+  },
+  {
+    "name": "La Habana, La Habana Vieja, La Habana, 10000, Cuba",
+    "search_term": "Havana, Cuba",
+    "bbox": {
+      "west": -82.5189631,
+      "south": 22.975305,
+      "east": -82.1989631,
+      "north": 23.295305
+    }
+  },
+  {
+    "name": "Montréal, Agglomération de Montréal, Montréal (région administrative), Québec, Canada",
+    "search_term": "Montreal, Canada",
+    "bbox": {
+      "west": -73.9741567,
+      "south": 45.4100756,
+      "east": -73.4742952,
+      "north": 45.7047897
+    }
+  },
+  {
+    "name": "Ecatepec de Morelos, Estado de México, México",
+    "search_term": "Ecatepec de Morelos, Mexico",
+    "bbox": {
+      "west": -99.118598,
+      "south": 19.4845696,
+      "east": -98.9757652,
+      "north": 19.6591485
+    }
+  },
+  {
+    "name": "Phoenix, Maricopa County, Arizona, United States of America",
+    "search_term": "Phoenix, USA",
+    "bbox": {
+      "west": -112.3240289,
+      "south": 33.2904827,
+      "east": -111.9255304,
+      "north": 33.9183794
+    }
+  },
+  {
+    "name": "Philadelphia, Philadelphia County, Pennsylvania, United States of America",
+    "search_term": "Philadelphia, USA",
+    "bbox": {
+      "west": -75.280266,
+      "south": 39.867005,
+      "east": -74.9558314,
+      "north": 40.1379593
+    }
+  },
+  {
+    "name": "San Antonio, Bexar County, Texas, United States of America",
+    "search_term": "San Antonio, USA",
+    "bbox": {
+      "west": -98.8131865,
+      "south": 29.1862572,
+      "east": -98.2230029,
+      "north": 29.7309623
+    }
+  },
+  {
+    "name": "Tijuana, Municipio de Tijuana, Baja California, 22000, México",
+    "search_term": "Tijuana, Mexico",
+    "bbox": {
+      "west": -117.179529,
+      "south": 32.3717397,
+      "east": -116.859529,
+      "north": 32.6917397
+    }
+  },
+  {
+    "name": "San Diego, San Diego County, California, United States of America",
+    "search_term": "San Diego, USA",
+    "bbox": {
+      "west": -117.3098161,
+      "south": 32.5347979,
+      "east": -116.9057417,
+      "north": 33.114194
+    }
+  },
+  {
+    "name": "León, Guanajuato, 37370, México",
+    "search_term": "León, Mexico",
+    "bbox": {
+      "west": -101.8429766,
+      "south": 20.961965,
+      "east": -101.5229766,
+      "north": 21.281965
+    }
+  },
+  {
+    "name": "Dallas, Dallas County, Texas, United States of America",
+    "search_term": "Dallas, USA",
+    "bbox": {
+      "west": -97.000482,
+      "south": 32.613216,
+      "east": -96.4636317,
+      "north": 33.0239366
+    }
+  },
+  {
+    "name": "Puebla, México",
+    "search_term": "Puebla, Mexico",
+    "bbox": {
+      "west": -99.070494,
+      "south": 17.860912,
+      "east": -96.7246199,
+      "north": 20.8396271
+    }
+  },
+  {
+    "name": "Ciudad Juárez, Juárez, Chihuahua, 32001, México",
+    "search_term": "Juárez, Mexico",
+    "bbox": {
+      "west": -106.645655,
+      "south": 31.5772575,
+      "east": -106.325655,
+      "north": 31.8972575
+    }
+  },
+  {
+    "name": "Ciudad de Guatemala, Zona 11, Departamento de Guatemala, Guatemala",
+    "search_term": "Guatemala City, Guatemala",
+    "bbox": {
+      "west": -90.5870896,
+      "south": 14.5364078,
+      "east": -90.3854097,
+      "north": 14.7137893
+    }
+  },
+  {
+    "name": "Guadalajara, Región Centro, Jalisco, 44450, México",
+    "search_term": "Guadalajara, Mexico",
+    "bbox": {
+      "west": -103.498396,
+      "south": 20.5120375,
+      "east": -103.178396,
+      "north": 20.8320375
+    }
+  },
+  {
+    "name": "Zapopan, Región Centro, Jalisco, 45101, México",
+    "search_term": "Zapopan, Mexico",
+    "bbox": {
+      "west": -103.5513671,
+      "south": 20.5611203,
+      "east": -103.2313671,
+      "north": 20.8811203
+    }
+  },
+  {
+    "name": "Austin, Travis County, Texas, United States of America",
+    "search_term": "Austin, USA",
+    "bbox": {
+      "west": -97.9367663,
+      "south": 30.0985133,
+      "east": -97.5605288,
+      "north": 30.5166255
+    }
+  },
+  {
+    "name": "Calgary, Alberta, Canada",
+    "search_term": "Calgary, Canada",
+    "bbox": {
+      "west": -114.3157587,
+      "south": 50.842526,
+      "east": -113.8600018,
+      "north": 51.2125013
+    }
+  },
+  {
+    "name": "San Jose, Santa Clara County, California, United States of America",
+    "search_term": "San Jose, USA",
+    "bbox": {
+      "west": -122.046227,
+      "south": 37.1231596,
+      "east": -121.5858438,
+      "north": 37.4691477
+    }
+  },
+  {
+    "name": "Monterrey, Nuevo León, 64010, México",
+    "search_term": "Monterrey, Mexico",
+    "bbox": {
+      "west": -100.475258,
+      "south": 25.5202019,
+      "east": -100.155258,
+      "north": 25.8402019
+    }
+  },
+  {
+    "name": "Jacksonville, Duval County, Florida, United States of America",
+    "search_term": "Jacksonville, USA",
+    "bbox": {
+      "west": -82.0493895,
+      "south": 30.103748,
+      "east": -81.316712,
+      "north": 30.5862095
+    }
+  },
+  {
+    "name": "Fort Worth, Tarrant County, Texas, United States of America",
+    "search_term": "Fort Worth, USA",
+    "bbox": {
+      "west": -97.592388,
+      "south": 32.551584,
+      "east": -97.0335808,
+      "north": 33.049529
+    }
+  },
+  {
+    "name": "Columbus, Franklin County, Ohio, United States of America",
+    "search_term": "Columbus, USA",
+    "bbox": {
+      "west": -83.2101797,
+      "south": 39.8086936,
+      "east": -82.7713119,
+      "north": 40.1573082
+    }
+  },
+  {
+    "name": "Charlotte, Mecklenburg County, North Carolina, United States of America",
+    "search_term": "Charlotte, USA",
+    "bbox": {
+      "west": -81.0116951,
+      "south": 35.0105195,
+      "east": -80.6348755,
+      "north": 35.4002508
+    }
+  },
+  {
+    "name": "Nezahualcóyotl, Avenida Jorge Jiménez Cantú, Colonia Bosques de Aragón, Nezahualcóyotl, Estado de México, 57170, México",
+    "search_term": "Nezahualcóyotl, Mexico",
+    "bbox": {
+      "west": -99.0596362,
+      "south": 19.4678672,
+      "east": -99.0496362,
+      "north": 19.4778672
+    }
+  },
+  {
+    "name": "Indianapolis, Marion County, Indiana, United States of America",
+    "search_term": "Indianapolis, USA",
+    "bbox": {
+      "west": -86.3281207,
+      "south": 39.6321626,
+      "east": -85.9380401,
+      "north": 39.9275253
+    }
+  },
+  {
+    "name": "Santo Domingo, Santo Domingo de Guzmán, Distrito Nacional, 03201, República Dominicana",
+    "search_term": "Santo Domingo, Dominican Republic",
+    "bbox": {
+      "west": -70.0518436,
+      "south": 18.3113858,
+      "east": -69.7318436,
+      "north": 18.6313858
+    }
+  },
+  {
+    "name": "San Francisco, California, United States of America",
+    "search_term": "San Francisco, USA",
+    "bbox": {
+      "west": -123.173825,
+      "south": 37.6403143,
+      "east": -122.2814578,
+      "north": 37.9296678
+    }
+  },
+  {
+    "name": "Seattle, King County, Washington, United States of America",
+    "search_term": "Seattle, USA",
+    "bbox": {
+      "west": -122.459696,
+      "south": 47.4810022,
+      "east": -122.224433,
+      "north": 47.7341503
+    }
+  },
+  {
+    "name": "Denver, Colorado, United States of America",
+    "search_term": "Denver, USA",
+    "bbox": {
+      "west": -105.1098845,
+      "south": 39.6143008,
+      "east": -104.5996997,
+      "north": 39.9142087
+    }
+  },
+  {
+    "name": "Washington, District of Columbia, United States of America",
+    "search_term": "Washington, D.C., USA",
+    "bbox": {
+      "west": -77.1197949,
+      "south": 38.7916303,
+      "east": -76.909366,
+      "north": 38.995968
+    }
+  },
+  {
+    "name": "Boston, Suffolk County, Massachusetts, United States of America",
+    "search_term": "Boston, USA",
+    "bbox": {
+      "west": -71.1912442,
+      "south": 42.2279112,
+      "east": -70.8044881,
+      "north": 42.3969775
+    }
+  },
+  {
+    "name": "El Paso, El Paso County, Texas, United States of America",
+    "search_term": "El Paso, USA",
+    "bbox": {
+      "west": -106.6357782,
+      "south": 31.6222161,
+      "east": -106.1991528,
+      "north": 32.001484
+    }
+  },
+  {
+    "name": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States of America",
+    "search_term": "Nashville, USA",
+    "bbox": {
+      "west": -87.054766,
+      "south": 35.967785,
+      "east": -86.515588,
+      "north": 36.405496
+    }
+  },
+  {
+    "name": "Detroit, Wayne County, Michigan, United States of America",
+    "search_term": "Detroit, USA",
+    "bbox": {
+      "west": -83.287959,
+      "south": 42.255192,
+      "east": -82.9104391,
+      "north": 42.4503959
+    }
+  },
+  {
+    "name": "Edmonton, Alberta, Canada",
+    "search_term": "Edmonton, Canada",
+    "bbox": {
+      "west": -113.7138411,
+      "south": 53.3372558,
+      "east": -113.2714783,
+      "north": 53.7162646
+    }
+  },
+  {
+    "name": "Oklahoma City, Oklahoma County, Oklahoma, United States of America",
+    "search_term": "Oklahoma City, USA",
+    "bbox": {
+      "west": -97.830948,
+      "south": 35.290695,
+      "east": -97.124718,
+      "north": 35.6748662
+    }
+  },
+  {
+    "name": "Ottawa, Eastern Ontario, Ontario, Canada",
+    "search_term": "Ottawa, Canada",
+    "bbox": {
+      "west": -76.3555857,
+      "south": 44.9617738,
+      "east": -75.2465783,
+      "north": 45.5376502
+    }
+  },
+  {
+    "name": "Portland, Multnomah County, Oregon, United States of America",
+    "search_term": "Portland, USA",
+    "bbox": {
+      "west": -122.8367489,
+      "south": 45.432536,
+      "east": -122.4720252,
+      "north": 45.6528812
+    }
+  },
+  {
+    "name": "Las Vegas, Clark County, Nevada, United States of America",
+    "search_term": "Las Vegas, USA",
+    "bbox": {
+      "west": -115.406575,
+      "south": 36.129554,
+      "east": -115.062066,
+      "north": 36.401481
+    }
+  },
+  {
+    "name": "Memphis, Shelby County, West Tennessee, Tennessee, United States of America",
+    "search_term": "Memphis, USA",
+    "bbox": {
+      "west": -90.308366,
+      "south": 34.9941528,
+      "east": -89.637089,
+      "north": 35.263879
+    }
+  },
+  {
+    "name": "Louisville, Jefferson County, Kentucky, United States of America",
+    "search_term": "Louisville, USA",
+    "bbox": {
+      "west": -85.9470644,
+      "south": 37.9971,
+      "east": -85.4051,
+      "north": 38.3801391
+    }
+  },
+  {
+    "name": "Baltimore, Maryland, United States of America",
+    "search_term": "Baltimore, USA",
+    "bbox": {
+      "west": -76.7112977,
+      "south": 39.1972328,
+      "east": -76.5296757,
+      "north": 39.3719992
+    }
+  },
+  {
+    "name": "Milwaukee, Milwaukee County, Wisconsin, United States of America",
+    "search_term": "Milwaukee, USA",
+    "bbox": {
+      "west": -88.0710611,
+      "south": 42.920816,
+      "east": -87.8627124,
+      "north": 43.1949437
+    }
+  },
+  {
+    "name": "Albuquerque, Bernalillo County, New Mexico, United States of America",
+    "search_term": "Albuquerque, USA",
+    "bbox": {
+      "west": -106.8821501,
+      "south": 34.9470871,
+      "east": -106.4714237,
+      "north": 35.218203
+    }
+  },
+  {
+    "name": "São Paulo, Região Imediata de São Paulo, Região Metropolitana de São Paulo, Região Geográfica Intermediária de São Paulo, São Paulo, Região Sudeste, Brasil",
+    "search_term": "São Paulo, Brazil",
+    "bbox": {
+      "west": -46.8262692,
+      "south": -24.0079003,
+      "east": -46.3650898,
+      "north": -23.3577551
+    }
+  },
+  {
+    "name": "Lima, Lima Metropolitana, Lima, 15001, Perú",
+    "search_term": "Lima, Peru",
+    "bbox": {
+      "west": -77.1905912,
+      "south": -12.2059808,
+      "east": -76.8705912,
+      "north": -11.8859808
+    }
+  },
+  {
+    "name": "Bogotá, Bogotá, Distrito Capital, RAP (Especial) Central, Colombia",
+    "search_term": "Bogotá, Colombia",
+    "bbox": {
+      "west": -74.2235137,
+      "south": 4.465596,
+      "east": -74.0102577,
+      "north": 4.8332542
+    }
+  },
+  {
+    "name": "Rio de Janeiro, Região Geográfica Imediata do Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Região Geográfica Intermediária do Rio de Janeiro, Rio de Janeiro, Região Sudeste, Brasil",
+    "search_term": "Rio de Janeiro, Brazil",
+    "bbox": {
+      "west": -43.796252,
+      "south": -23.0827051,
+      "east": -43.0990811,
+      "north": -22.7460878
+    }
+  },
+  {
+    "name": "Santiago, Provincia de Santiago, Región Metropolitana de Santiago, 8320000, Chile",
+    "search_term": "Santiago, Chile",
+    "bbox": {
+      "west": -70.8104502,
+      "south": -33.5977756,
+      "east": -70.4904502,
+      "north": -33.2777756
+    }
+  },
+  {
+    "name": "Buenos Aires, Comuna 1, Ciudad Autónoma de Buenos Aires, Argentina",
+    "search_term": "Buenos Aires, Argentina",
+    "bbox": {
+      "west": -58.5314504,
+      "south": -34.7058155,
+      "east": -58.3351423,
+      "north": -34.5265535
+    }
+  },
+  {
+    "name": "Caracas, Parroquia Catedral, Municipio Libertador, Distrito Metropolitano de Caracas, Distrito Capital, Venezuela",
+    "search_term": "Caracas, Venezuela",
+    "bbox": {
+      "west": -67.163238,
+      "south": 10.3403965,
+      "east": -66.6922249,
+      "north": 10.5677411
+    }
+  },
+  {
+    "name": "Brasil",
+    "search_term": "Brasília, Brazil",
+    "bbox": {
+      "west": -73.9830625,
+      "south": -33.8694284,
+      "east": -28.6289646,
+      "north": 5.2695808
+    }
+  },
+  {
+    "name": "Salvador, Região Geográfica Imediata de Salvador, Região Metropolitana de Salvador, Região Geográfica Intermediária de Salvador, Bahia, Região Nordeste, Brasil",
+    "search_term": "Salvador, Brazil",
+    "bbox": {
+      "west": -38.6994346,
+      "south": -13.0173949,
+      "east": -38.3034141,
+      "north": -12.7335366
+    }
+  },
+  {
+    "name": "Fortaleza, Região Geográfica Imediata de Fortaleza, Região Geográfica Intermediária de Fortaleza, Ceará, Região Nordeste, Brasil",
+    "search_term": "Fortaleza, Brazil",
+    "bbox": {
+      "west": -38.6379078,
+      "south": -3.8945441,
+      "east": -38.4013259,
+      "north": -3.6921047
+    }
+  },
+  {
+    "name": "Belo Horizonte, Região Geográfica Imediata de Belo Horizonte, Região Metropolitana de Belo Horizonte, Região Geográfica Intermediária de Belo Horizonte, Minas Gerais, Região Sudeste, Brasil",
+    "search_term": "Belo Horizonte, Brazil",
+    "bbox": {
+      "west": -44.0632916,
+      "south": -20.0594646,
+      "east": -43.8572199,
+      "north": -19.7765437
+    }
+  },
+  {
+    "name": "Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 0500, Colombia",
+    "search_term": "Medellín, Colombia",
+    "bbox": {
+      "west": -75.7192406,
+      "south": 6.1633051,
+      "east": -75.47364,
+      "north": 6.3764208
+    }
+  },
+  {
+    "name": "Manaus, Região Geográfica Imediata de Manaus, Região Geográfica Intermediária de Manaus, Amazonas, Região Norte, 69000-000, Brasil",
+    "search_term": "Manaus, Brazil",
+    "bbox": {
+      "west": -60.801,
+      "south": -3.222,
+      "east": -59.16,
+      "north": -1.924
+    }
+  },
+  {
+    "name": "Curitiba, Região Geográfica Imediata de Curitiba, Região Metropolitana de Curitiba, Região Geográfica Intermediária de Curitiba, Paraná, Região Sul, Brasil",
+    "search_term": "Curitiba, Brazil",
+    "bbox": {
+      "west": -49.38914,
+      "south": -25.6435043,
+      "east": -49.1843182,
+      "north": -25.3450768
+    }
+  },
+  {
+    "name": "Guayaquil, Guayas, Ecuador",
+    "search_term": "Guayaquil, Ecuador",
+    "bbox": {
+      "west": -80.3123629,
+      "south": -2.6170287,
+      "east": -79.8563511,
+      "north": -1.9622343
+    }
+  },
+  {
+    "name": "Recife, Região Geográfica Imediata do Recife, Região Metropolitana do Recife, Região Geográfica Intermediária do Recife, Pernambuco, Região Nordeste, Brasil",
+    "search_term": "Recife, Brazil",
+    "bbox": {
+      "west": -35.0186478,
+      "south": -8.1551869,
+      "east": -34.8515401,
+      "north": -7.928967
+    }
+  },
+  {
+    "name": "Cali, Sur, Valle del Cauca, RAP Pacífico, Colombia",
+    "search_term": "Cali, Colombia",
+    "bbox": {
+      "west": -76.7069442,
+      "south": 3.2734085,
+      "east": -76.4588983,
+      "north": 3.548577
+    }
+  },
+  {
+    "name": "Municipio Santa Cruz de la Sierra, Provincia Andrés Ibáñez, Santa Cruz, Bolivia",
+    "search_term": "Santa Cruz de la Sierra, Bolivia",
+    "bbox": {
+      "west": -63.2840834,
+      "south": -18.0179123,
+      "east": -62.7626556,
+      "north": -17.508098
+    }
+  },
+  {
+    "name": "Porto Alegre, Região Geográfica Imediata de Porto Alegre, Região Metropolitana de Porto Alegre, Região Geográfica Intermediária de Porto Alegre, Rio Grande do Sul, Região Sul, Brasil",
+    "search_term": "Porto Alegre, Brazil",
+    "bbox": {
+      "west": -51.3034404,
+      "south": -30.2694499,
+      "east": -51.0188522,
+      "north": -29.9324744
+    }
+  },
+  {
+    "name": "Goiânia, Região Geográfica Imediata de Goiânia, Região Geográfica Intermediária de Goiânia, Goiás, Região Centro-Oeste, Brasil",
+    "search_term": "Goiânia, Brazil",
+    "bbox": {
+      "west": -49.4469524,
+      "south": -16.8318764,
+      "east": -49.078,
+      "north": -16.4542142
+    }
+  },
+  {
+    "name": "Belém, Região Geográfica Imediata de Belém, Região Geográfica Intermediária de Belém, Pará, Região Norte, Brasil",
+    "search_term": "Belém, Brazil",
+    "bbox": {
+      "west": -48.6244082,
+      "south": -1.5265847,
+      "east": -48.2961242,
+      "north": -1.0194267
+    }
+  },
+  {
+    "name": "Maracaibo, Parroquia Cacique Mara, Municipio Maracaibo, Zulia, 4012, Venezuela",
+    "search_term": "Maracaibo, Venezuela",
+    "bbox": {
+      "west": -71.8043596,
+      "south": 10.4898095,
+      "east": -71.4843596,
+      "north": 10.8098095
+    }
+  },
+  {
+    "name": "Quito, Pichincha, 170130, Ecuador",
+    "search_term": "Quito, Ecuador",
+    "bbox": {
+      "west": -78.6723274,
+      "south": -0.3801641,
+      "east": -78.3523274,
+      "north": -0.0601641
+    }
+  },
+  {
+    "name": "Guarulhos, Região Imediata de São Paulo, Região Metropolitana de São Paulo, Região Geográfica Intermediária de São Paulo, São Paulo, Região Sudeste, Brasil",
+    "search_term": "Guarulhos, Brazil",
+    "bbox": {
+      "west": -46.570839,
+      "south": -23.510097,
+      "east": -46.335728,
+      "north": -23.273746
+    }
+  },
+  {
+    "name": "Campinas, Região Imediata de Campinas, Região Metropolitana de Campinas, Região Geográfica Intermediária de Campinas, São Paulo, Região Sudeste, Brasil",
+    "search_term": "Campinas, Brazil",
+    "bbox": {
+      "west": -47.2463023,
+      "south": -23.0612161,
+      "east": -46.8152838,
+      "north": -22.7290463
+    }
+  },
+  {
+    "name": "Barranquilla, Atlántico, RAP Caribe, Colombia",
+    "search_term": "Barranquilla, Colombia",
+    "bbox": {
+      "west": -74.9192124,
+      "south": 10.9138881,
+      "east": -74.753632,
+      "north": 11.1066448
+    }
+  },
+  {
+    "name": "São Luís, Região Geográfica Imediata de São Luís, Região Geográfica Intermediária de São Luís, Maranhão, Região Nordeste, Brasil",
+    "search_term": "São Luís, Brazil",
+    "bbox": {
+      "west": -44.4110534,
+      "south": -2.8004242,
+      "east": -44.1616205,
+      "north": -2.473258
+    }
+  },
+  {
+    "name": "São Gonçalo, Região Geográfica Imediata do Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Região Geográfica Intermediária do Rio de Janeiro, Rio de Janeiro, Região Sudeste, Brasil",
+    "search_term": "São Gonçalo, Brazil",
+    "bbox": {
+      "west": -43.1155404,
+      "south": -22.9091541,
+      "east": -42.8859505,
+      "north": -22.7340701
+    }
+  },
+  {
+    "name": "Maceió, Região Geográfica Imediata de Maceió, Região Geográfica Intermediária de Maceió, Alagoas, Região Nordeste, Brasil",
+    "search_term": "Maceió, Brazil",
+    "bbox": {
+      "west": -35.814353,
+      "south": -9.7131396,
+      "east": -35.5583254,
+      "north": -9.371
+    }
+  },
+  {
+    "name": "Callao, Perú",
+    "search_term": "Callao, Peru",
+    "bbox": {
+      "west": -77.2515611,
+      "south": -12.1207452,
+      "east": -77.0767239,
+      "north": -11.8192774
+    }
+  },
+  {
+    "name": "Duque de Caxias, Região Geográfica Imediata do Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Região Geográfica Intermediária do Rio de Janeiro, Rio de Janeiro, Região Sudeste, Brasil",
+    "search_term": "Duque de Caxias, Brazil",
+    "bbox": {
+      "west": -43.4167271,
+      "south": -22.8104928,
+      "east": -43.1941938,
+      "north": -22.4755036
+    }
+  },
+  {
+    "name": "Córdoba, Municipio de Córdoba, Pedanía Capital, Departamento Capital, Córdoba, X5000, Argentina",
+    "search_term": "Córdoba, Argentina",
+    "bbox": {
+      "west": -64.3100961,
+      "south": -31.5251273,
+      "east": -64.05725,
+      "north": -31.3083295
+    }
+  },
+  {
+    "name": "Nova Iguaçu, Região Geográfica Imediata do Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Região Geográfica Intermediária do Rio de Janeiro, Rio de Janeiro, Região Sudeste, Brasil",
+    "search_term": "Nova Iguaçu, Brazil",
+    "bbox": {
+      "west": -43.6737687,
+      "south": -22.8652766,
+      "east": -43.3643969,
+      "north": -22.5260125
+    }
+  },
+  {
+    "name": "Teresina, Região Geográfica Imediata de Teresina, Região Integrada de Desenvolvimento da Grande Teresina, Região Geográfica Intermediária de Teresina, Piauí, Região Nordeste, Brasil",
+    "search_term": "Teresina, Brazil",
+    "bbox": {
+      "west": -42.9706437,
+      "south": -5.586598,
+      "east": -42.599,
+      "north": -4.787
+    }
+  },
+  {
+    "name": "Campo Grande, Região Geográfica Imediata de Campo Grande, Região Geográfica Intermediária de Campo Grande, Mato Grosso do Sul, Região Centro-Oeste, Brasil",
+    "search_term": "Campo Grande, Brazil",
+    "bbox": {
+      "west": -54.9252802,
+      "south": -21.5845441,
+      "east": -53.5997434,
+      "north": -20.1659663
+    }
+  },
+  {
+    "name": "Rosario, Municipio de Rosario, Gran Rosario, Departamento Rosario, Santa Fe, S2000, Argentina",
+    "search_term": "Rosario, Argentina",
+    "bbox": {
+      "west": -60.7832623,
+      "south": -33.0348662,
+      "east": -60.6116695,
+      "north": -32.8696461
+    }
+  },
+  {
+    "name": "Rua Severiano Bernardo Dias, Nossa Senhora de Fatima, Barbacena, Região Geográfica Imediata de Barbacena, Região Geográfica Intermediária de Juiz de Fora, Minas Gerais, Região Sudeste, 36205-018, Brasil",
+    "search_term": "ão Bernardo do Campo, Brazil",
+    "bbox": {
+      "west": -43.7734616,
+      "south": -21.2361589,
+      "east": -43.7728381,
+      "north": -21.2358745
+    }
+  },
+  {
+    "name": "Natal, Região Geográfica Imediata de Natal, Região Geográfica Intermediária de Natal, Rio Grande do Norte, Região Nordeste, Brasil",
+    "search_term": "Natal, Brazil",
+    "bbox": {
+      "west": -35.2912366,
+      "south": -5.9002112,
+      "east": -35.1531034,
+      "north": -5.7027379
+    }
+  },
+  {
+    "name": "João Pessoa, Região Geográfica Imediata de João Pessoa, Região Metropolitana de João Pessoa, Região Geográfica Intermediária de João Pessoa, Paraíba, Região Nordeste, Brasil",
+    "search_term": "João Pessoa, Brazil",
+    "bbox": {
+      "west": -34.9740106,
+      "south": -7.2477433,
+      "east": -34.7930182,
+      "north": -7.0559654
+    }
+  },
+  {
+    "name": "Santo André, Região Imediata de São Paulo, Região Metropolitana de São Paulo, Região Geográfica Intermediária de São Paulo, São Paulo, Região Sudeste, Brasil",
+    "search_term": "Santo André, Brazil",
+    "bbox": {
+      "west": -46.5673015,
+      "south": -23.8158052,
+      "east": -46.2786211,
+      "north": -23.6056577
+    }
+  },
+  {
+    "name": "Arequipa, Perú",
+    "search_term": "Arequipa, Peru",
+    "bbox": {
+      "west": -71.5650919,
+      "south": -16.4328295,
+      "east": -71.5133305,
+      "north": -16.3740773
+    }
+  },
+  {
+    "name": "Barquisimeto, Parroquia Concepción, Municipio Iribarren, Lara, 3001, Venezuela",
+    "search_term": "Barquisimeto, Venezuela",
+    "bbox": {
+      "west": -69.4822293,
+      "south": 9.9174374,
+      "east": -69.1622293,
+      "north": 10.2374374
+    }
+  },
+  {
+    "name": "Cartagena de Indias, Dique, Bolívar, Colombia",
+    "search_term": "Cartagena, Colombia",
+    "bbox": {
+      "west": -76.1904632,
+      "south": 9.377755,
+      "east": -75.2872048,
+      "north": 10.7037837
+    }
+  },
+  {
+    "name": "Trujillo, La Libertad, Perú",
+    "search_term": "Trujillo, Peru",
+    "bbox": {
+      "west": -79.0649941,
+      "south": -8.1509852,
+      "east": -78.9827741,
+      "north": -8.0831602
+    }
+  },
+  {
+    "name": "Montevideo, Uruguay",
+    "search_term": "Montevideo, Uruguay",
+    "bbox": {
+      "west": -56.4313997,
+      "south": -34.938056,
+      "east": -56.0225006,
+      "north": -34.7018526
+    }
+  },
+  {
+    "name": "Osasco, Região Imediata de São Paulo, Região Metropolitana de São Paulo, Região Geográfica Intermediária de São Paulo, São Paulo, Região Sudeste, Brasil",
+    "search_term": "Osasco, Brazil",
+    "bbox": {
+      "west": -46.821827,
+      "south": -23.6090912,
+      "east": -46.747045,
+      "north": -23.4613543
+    }
+  },
+  {
+    "name": "Valencia, Parroquia Santa Rosa, Municipio Valencia, Carabobo, Venezuela",
+    "search_term": "Valencia, Venezuela",
+    "bbox": {
+      "west": -68.0778871,
+      "south": 10.1103999,
+      "east": -67.9108491,
+      "north": 10.2777934
+    }
+  },
+  {
+    "name": "La Paz, Pedro Domingo Murillo, La Paz, Bolivia",
+    "search_term": "La Paz, Bolivia",
+    "bbox": {
+      "west": -68.2458469,
+      "south": -16.5923149,
+      "east": -67.6237089,
+      "north": -15.7586421
+    }
+  },
+  {
+    "name": "El Alto, Pedro Domingo Murillo, La Paz, Bolivia",
+    "search_term": "El Alto, Bolivia",
+    "bbox": {
+      "west": -68.32013,
+      "south": -16.6669839,
+      "east": -68.108265,
+      "north": -16.2626621
+    }
+  },
+  {
+    "name": "Chiclayo, Lambayeque, Perú",
+    "search_term": "Chiclayo, Peru",
+    "bbox": {
+      "west": -79.8722949,
+      "south": -6.8325976,
+      "east": -79.7801182,
+      "north": -6.739847
+    }
+  },
+  {
+    "name": "Sydney, Council of the City of Sydney, New South Wales, Australia",
+    "search_term": "Sydney, Australia",
+    "bbox": {
+      "west": 150.260825,
+      "south": -34.1732416,
+      "east": 151.343898,
+      "north": -33.3641864
+    }
+  },
+  {
+    "name": "Melbourne, City of Melbourne, Victoria, Australia",
+    "search_term": "Melbourne, Australia",
+    "bbox": {
+      "west": 144.44405,
+      "south": -38.49937,
+      "east": 146.1925,
+      "north": -37.40175
+    }
+  },
+  {
+    "name": "City of Brisbane, Queensland, Australia",
+    "search_term": "Brisbane, Australia",
+    "bbox": {
+      "west": 152.679693,
+      "south": -27.660219,
+      "east": 153.4682348,
+      "north": -27.0215438
+    }
+  },
+  {
+    "name": "Perth, City of Perth, Western Australia, 6000, Australia",
+    "search_term": "Perth, Australia",
+    "bbox": {
+      "west": 115.7005784,
+      "south": -32.1158967,
+      "east": 116.0205784,
+      "north": -31.7958967
+    }
+  },
+  {
+    "name": "Auckland, Waitematā, Auckland, 1010, New Zealand / Aotearoa",
+    "search_term": "Auckland, New Zealand",
+    "bbox": {
+      "west": 174.6031803,
+      "south": -37.012095,
+      "east": 174.9231803,
+      "north": -36.692095
+    }
+  },
+  {
+    "name": "Adelaide, Adelaide City Council, South Australia, Australia",
+    "search_term": "Adelaide, Australia",
+    "bbox": {
+      "west": 138.4281386,
+      "south": -35.350296,
+      "east": 138.8479091,
+      "north": -34.572242
+    }
+  },
+  {
+    "name": "Gold Coast City, Queensland, Australia",
+    "search_term": "Gold Coast, Australia",
+    "bbox": {
+      "west": 153.16891,
+      "south": -28.26511,
+      "east": 153.5519459,
+      "north": -27.690395
+    }
+  },
+  {
+    "name": "Newcastle, Newcastle-Maitland, City of Newcastle, New South Wales, 2300, Australia",
+    "search_term": "Newcastle, Australia",
+    "bbox": {
+      "west": 151.7596295,
+      "south": -32.937805,
+      "east": 151.803932,
+      "north": -32.901482
+    }
+  },
+  {
+    "name": "Canberra, District of Canberra Central, Australian Capital Territory, 2600, Australia",
+    "search_term": "Canberra, Australia",
+    "bbox": {
+      "west": 148.9412676,
+      "south": -35.4575906,
+      "east": 149.2612676,
+      "north": -35.1375906
+    }
+  },
+  {
+    "name": "Wellington, Wellington City, Wellington, 6011, New Zealand / Aotearoa",
+    "search_term": "Wellington, New Zealand",
+    "bbox": {
+      "west": 174.6172114,
+      "south": -41.4487953,
+      "east": 174.9372114,
+      "north": -41.1287953
+    }
+  },
+  {
+    "name": "Christchurch, Christchurch City, Canterbury, New Zealand / Aotearoa",
+    "search_term": "Christchurch, New Zealand",
+    "bbox": {
+      "west": 172.4239816,
+      "south": -43.628593,
+      "east": 172.7797721,
+      "north": -43.4346175
+    }
+  },
+  {
+    "name": "Sunshine Coast Regional, Queensland, Australia",
+    "search_term": "Sunshine Coast, Australia",
+    "bbox": {
+      "west": 152.551107,
+      "south": -26.984787,
+      "east": 153.150795,
+      "north": -26.431058
+    }
+  },
+  {
+    "name": "Wollongong City Council, New South Wales, Australia",
+    "search_term": "Wollongong, Australia",
+    "bbox": {
+      "west": 150.6351001,
+      "south": -34.5537423,
+      "east": 151.0665796,
+      "north": -34.1300239
+    }
+  },
+  {
+    "name": "Geelong, City of Greater Geelong, Victoria, 3218, Australia",
+    "search_term": "Geelong, Australia",
+    "bbox": {
+      "west": 144.1998241,
+      "south": -38.3093248,
+      "east": 144.5198241,
+      "north": -37.9893248
+    }
+  },
+  {
+    "name": "Port Moresby, National Capital District, Southern Region, 111, Papua Niugini",
+    "search_term": "Port Moresby, Papua New Guinea",
+    "bbox": {
+      "west": 146.9999504,
+      "south": -9.6343301,
+      "east": 147.3199504,
+      "north": -9.3143301
+    }
+  },
+  {
+    "name": "Hobart, City of Hobart, Tasmania, Australia",
+    "search_term": "Hobart, Australia",
+    "bbox": {
+      "west": 147.091688,
+      "south": -43.103615,
+      "east": 147.645588,
+      "north": -42.655376
+    }
+  },
+  {
+    "name": "Townsville, Townsville City, Queensland, 4810, Australia",
+    "search_term": "Townsville, Australia",
+    "bbox": {
+      "west": 146.6639537,
+      "south": -19.4169391,
+      "east": 146.9839537,
+      "north": -19.0969391
+    }
+  },
+  {
+    "name": "Hamilton City, Waikato, New Zealand / Aotearoa",
+    "search_term": "Hamilton, New Zealand",
+    "bbox": {
+      "west": 175.1843007,
+      "south": -37.846039,
+      "east": 175.3448766,
+      "north": -37.6993298
+    }
+  },
+  {
+    "name": "Cairns, Cairns Regional, Queensland, 4870, Australia",
+    "search_term": "Cairns, Australia",
+    "bbox": {
+      "west": 145.6121854,
+      "south": -17.0806657,
+      "east": 145.9321854,
+      "north": -16.7606657
+    }
+  },
+  {
+    "name": "Tauranga, Tauranga City, Bay of Plenty, 3110, New Zealand / Aotearoa",
+    "search_term": "Tauranga, New Zealand",
+    "bbox": {
+      "west": 176.007505,
+      "south": -37.8459006,
+      "east": 176.327505,
+      "north": -37.5259006
+    }
+  },
+  {
+    "name": "Darwin, City of Darwin, Northern Territory, 0800, Australia",
+    "search_term": "Darwin, Australia",
+    "bbox": {
+      "west": 130.6810469,
+      "south": -12.62044,
+      "east": 131.0010469,
+      "north": -12.30044
+    }
+  },
+  {
+    "name": "Toowoomba, Toowoomba Regional, Queensland, 4350, Australia",
+    "search_term": "Toowoomba, Australia",
+    "bbox": {
+      "west": 151.793351,
+      "south": -27.7210193,
+      "east": 152.113351,
+      "north": -27.4010193
+    }
+  },
+  {
+    "name": "Dunedin, Dunedin City, Otago, 9054, New Zealand / Aotearoa",
+    "search_term": "Dunedin, New Zealand",
+    "bbox": {
+      "west": 170.3435755,
+      "south": -46.0340984,
+      "east": 170.6635755,
+      "north": -45.7140984
+    }
+  },
+  {
+    "name": "Ballarat, City of Ballarat, Victoria, 3350, Australia",
+    "search_term": "Ballarat, Australia",
+    "bbox": {
+      "west": 143.7005645,
+      "south": -37.7223013,
+      "east": 144.0205645,
+      "north": -37.4023013
+    }
+  },
+  {
+    "name": "Bendigo, City of Greater Bendigo, Victoria, 3550, Australia",
+    "search_term": "Bendigo, Australia",
+    "bbox": {
+      "west": 144.1226718,
+      "south": -36.9190183,
+      "east": 144.4426718,
+      "north": -36.5990183
+    }
+  },
+  {
+    "name": "Lae, Lae District, Morobe, Momase Region, Papua Niugini",
+    "search_term": "Lae, Papua New Guinea",
+    "bbox": {
+      "west": 146.8408109,
+      "south": -6.8901976,
+      "east": 147.1608109,
+      "north": -6.5701976
+    }
+  },
+  {
+    "name": "Palmerston North, Palmerston North City, Manawatū-Whanganui, 4440, New Zealand / Aotearoa",
+    "search_term": "Palmerston North, New Zealand",
+    "bbox": {
+      "west": 175.4512388,
+      "south": -40.516317,
+      "east": 175.7712388,
+      "north": -40.196317
+    }
+  },
+  {
+    "name": "Albury Wodonga Equestrian Centre, Thurgoona, Albury, Albury City Council, New South Wales, 2640, Australia",
+    "search_term": "Albury-Wodonga, Australia",
+    "bbox": {
+      "west": 146.9630331,
+      "south": -36.0541462,
+      "east": 146.9779143,
+      "north": -36.0414204
+    }
+  },
+  {
+    "name": "Launceston, City of Launceston, Tasmania, Australia",
+    "search_term": "Launceston, Australia",
+    "bbox": {
+      "west": 146.972181,
+      "south": -41.526872,
+      "east": 147.305245,
+      "north": -41.334565
+    }
+  },
+  {
+    "name": "Mackay, Mackay Regional, Queensland, 4740, Australia",
+    "search_term": "Mackay, Australia",
+    "bbox": {
+      "west": 149.0265149,
+      "south": -21.301956,
+      "east": 149.3465149,
+      "north": -20.981956
+    }
+  },
+  {
+    "name": "Rockhampton, Rockhampton Regional, Queensland, 7200, Australia",
+    "search_term": "Rockhampton, Australia",
+    "bbox": {
+      "west": 150.3534227,
+      "south": -23.5382137,
+      "east": 150.6734227,
+      "north": -23.2182137
+    }
+  },
+  {
+    "name": "Bunbury, City Of Bunbury, Western Australia, 6230, Australia",
+    "search_term": "Bunbury, Australia",
+    "bbox": {
+      "west": 115.476698,
+      "south": -33.4867797,
+      "east": 115.796698,
+      "north": -33.1667797
+    }
+  },
+  {
+    "name": "Coffs Harbour, Coffs Harbour City Council, New South Wales, 2450, Australia",
+    "search_term": "Coffs Harbour, Australia",
+    "bbox": {
+      "west": 153.0598598,
+      "south": -30.3551694,
+      "east": 153.154835,
+      "north": -30.2616193
+    }
+  },
+  {
+    "name": "Bundaberg, Bundaberg Region, Queensland, Australia",
+    "search_term": "Bundaberg, Australia",
+    "bbox": {
+      "west": 152.1916785,
+      "south": -25.0253253,
+      "east": 152.5116785,
+      "north": -24.7053253
+    }
+  },
+  {
+    "name": "Nouméa, Province Sud, Nouvelle-Calédonie, 98800, France",
+    "search_term": "Nouméa, New Caledonia",
+    "bbox": {
+      "west": 166.3857934,
+      "south": -22.3125269,
+      "east": 166.5040433,
+      "north": -22.2167228
+    }
+  },
+  {
+    "name": "Wagga Wagga City Council, New South Wales, Australia",
+    "search_term": "Wagga Wagga, Australia",
+    "bbox": {
+      "west": 146.7787801,
+      "south": -35.5636245,
+      "east": 147.9314555,
+      "north": -34.8081185
+    }
+  },
+  {
+    "name": "Hervey Bay, Fraser Coast Regional, Queensland, 4655, Australia",
+    "search_term": "Hervey Bay, Australia",
+    "bbox": {
+      "west": 152.6935216,
+      "south": -25.4585784,
+      "east": 153.0135216,
+      "north": -25.1385784
+    }
+  },
+  {
+    "name": "Rotorua, Rotorua Lakes District, Bay of Plenty, 3040, New Zealand / Aotearoa",
+    "search_term": "Rotorua, New Zealand",
+    "bbox": {
+      "west": 176.0925434,
+      "south": -38.296073,
+      "east": 176.4125434,
+      "north": -37.976073
+    }
+  },
+  {
+    "name": "Whangārei, Whangārei District, Northland, 0110, New Zealand / Aotearoa",
+    "search_term": "Whangārei, New Zealand",
+    "bbox": {
+      "west": 174.1594202,
+      "south": -35.8875268,
+      "east": 174.4794202,
+      "north": -35.5675268
+    }
+  },
+  {
+    "name": "New Plymouth, New Plymouth District, Taranaki, 4310, New Zealand / Aotearoa",
+    "search_term": "New Plymouth, New Zealand",
+    "bbox": {
+      "west": 173.9206474,
+      "south": -39.2179941,
+      "east": 174.2406474,
+      "north": -38.8979941
+    }
+  },
+  {
+    "name": "Invercargill City, Southland, New Zealand / Aotearoa",
+    "search_term": "Invercargill, New Zealand",
+    "bbox": {
+      "west": 168.1954027,
+      "south": -46.6255852,
+      "east": 168.542778,
+      "north": -46.3221671
+    }
+  },
+  {
+    "name": "Nelson City, Nelson, New Zealand / Aotearoa",
+    "search_term": "Nelson, New Zealand",
+    "bbox": {
+      "west": 173.1898574,
+      "south": -41.3934269,
+      "east": 173.5987618,
+      "north": -41.0517529
+    }
+  },
+  {
+    "name": "Suva, Rewa, Central, Viti",
+    "search_term": "Suva, Fiji",
+    "bbox": {
+      "west": 178.2821662,
+      "south": -18.3015884,
+      "east": 178.6021662,
+      "north": -17.9815884
+    }
+  },
+  {
+    "name": "Hastings, Hastings District, Hawke's Bay, 4122, New Zealand / Aotearoa",
+    "search_term": "Hastings, New Zealand",
+    "bbox": {
+      "west": 176.6830781,
+      "south": -39.8017678,
+      "east": 177.0030781,
+      "north": -39.4817678
+    }
+  },
+  {
+    "name": "Shepparton, City of Greater Shepparton, Victoria, 3630, Australia",
+    "search_term": "Shepparton, Australia",
+    "bbox": {
+      "west": 145.35191,
+      "south": -36.426068,
+      "east": 145.431934,
+      "north": -36.32072
+    }
+  },
+  {
+    "name": "Mildura, Rural City of Mildura, Victoria, 3500, Australia",
+    "search_term": "Mildura, Australia",
+    "bbox": {
+      "west": 142.063238,
+      "south": -34.27277,
+      "east": 142.2039709,
+      "north": -34.1487118
+    }
+  },
+  {
+    "name": "Port Macquarie, Port Macquarie-Hastings Council, New South Wales, 2444, Australia",
+    "search_term": "Port Macquarie, Australia",
+    "bbox": {
+      "west": 152.8489452,
+      "south": -31.5171501,
+      "east": 152.9383742,
+      "north": -31.4052772
+    }
+  },
+  {
+    "name": "Gladstone, Gladstone Regional, Queensland, 4680, Australia",
+    "search_term": "Gladstone, Australia",
+    "bbox": {
+      "west": 151.096132,
+      "south": -24.0031724,
+      "east": 151.416132,
+      "north": -23.6831724
+    }
+  },
+  {
+    "name": "Tamworth, Tamworth Regional Council, New South Wales, 2340, Australia",
+    "search_term": "Tamworth, Australia",
+    "bbox": {
+      "west": 150.7690159,
+      "south": -31.2500743,
+      "east": 151.0890159,
+      "north": -30.9300743
+    }
+  },
+  {
+    "name": "Traralgon, City of Latrobe, Victoria, 3844, Australia",
+    "search_term": "Traralgon, Australia",
+    "bbox": {
+      "west": 146.464222,
+      "south": -38.250771,
+      "east": 146.564709,
+      "north": -38.153106
+    }
+  }
+]

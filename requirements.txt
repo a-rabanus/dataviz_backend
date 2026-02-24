@@ -1,0 +1,22 @@
+# Mapillary Pipeline
+ --extra-index-url https://download.pytorch.org/whl/cu118
+ torch
+ torchvision
+ torchaudio
+ ultralytics
+ mapillary
+ ultralytics
+ opencv-python-headless
+ requests
+ numpy
+ pandas
+ tqdm
+ quadfeather
+ polars
+ 
+ # Database & Config
+ python-dotenv
+
+ # web explorer
+ flask
+ tqdm
