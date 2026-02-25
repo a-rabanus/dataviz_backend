@@ -5,11 +5,9 @@ import json
 import time
 import csv
 import argparse
-import torch
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from ultralytics import YOLO
-from tqdm import tqdm
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if PROJECT_ROOT not in sys.path:
@@ -30,7 +28,8 @@ LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
 LOG_FILE = os.path.join(LOG_DIR, "performance_log.csv")
 MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
 
-executor = ThreadPoolExecutor(max_workers=4)
+# Increased workers for parallel I/O (reads, writes, deletes)
+executor = ThreadPoolExecutor(max_workers=8)
 
 def ensure_dirs():
     os.makedirs(CROP_DIR, exist_ok=True)
@@ -41,6 +40,12 @@ def delete_file_async(path):
         os.remove(path)
     except OSError:
         pass
+
+def write_crop_async(path, crop_array):
+    try:
+        cv2.imwrite(path, crop_array)
+    except Exception as e:
+        print(f"Error saving crop {path}: {e}")
 
 def log_performance(gpu_id, batch_size, images_count, duration, total_imgs, total_time, people_found, files_deleted):
     file_exists = os.path.isfile(LOG_FILE)
@@ -57,23 +62,24 @@ def log_performance(gpu_id, batch_size, images_count, duration, total_imgs, tota
             f"{current_fps:.2f}", f"{avg_fps:.2f}", people_found
         ])
 
+    print(f"[{gpu_id}] Batch ({images_count} img): {duration:.2f}s | {current_fps:.1f} FPS | Avg: {avg_fps:.1f} FPS")
+    print(f"[{gpu_id}] Found {people_found} people. Deleted {files_deleted} empty files.\n" + "-" * 50)
+
 def resolve_model(batch_size):
     engine_path = os.path.join(MODELS_DIR, f"yolov8n_batch{batch_size}.engine")
     if os.path.exists(engine_path):
-        return engine_path, True
+        return engine_path
     
     pt_path = os.path.join(MODELS_DIR, "yolov8n.pt")
     if os.path.exists(pt_path):
-        return pt_path, False
+        print(f"WARN: Engine file missing. Falling back to {pt_path}")
+        return pt_path
         
     sys.exit(f"ERROR: No model found in {MODELS_DIR}. Ensure yolov8n.pt or .engine exists.")
 
 def run_consumer(gpu_id, batch_size):
     device = f'cuda:{gpu_id}'
-    torch.cuda.set_device(gpu_id)
-    torch.backends.cudnn.benchmark = True
-    
-    model_file, is_engine = resolve_model(batch_size)
+    model_file = resolve_model(batch_size)
 
     conn = get_db_connection()
     if not conn:
@@ -82,16 +88,11 @@ def run_consumer(gpu_id, batch_size):
     ensure_dirs()
     create_tables(conn)
 
+    print(f"[{gpu_id}] Loading Model: {model_file} on {device}")
     try:
         model = YOLO(model_file, task='detect')
     except Exception as e:
         sys.exit(f"ERROR: Model load failed: {e}")
-
-    cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(id_image) FROM images_detected WHERE processing_status = 'pending'")
-    total_pending = cursor.fetchone()[0]
-    
-    pbar = tqdm(total=total_pending, desc=f"[GPU {gpu_id}] Processing", unit="img")
 
     session_start = time.time()
     total_images_processed = 0
@@ -101,11 +102,8 @@ def run_consumer(gpu_id, batch_size):
         images = claim_batch_for_analysis(conn, batch_size=batch_size)
         
         if not images:
-            pbar.set_description(f"[GPU {gpu_id}] Idle - Queue empty")
             time.sleep(2)
             continue
-            
-        pbar.set_description(f"[GPU {gpu_id}] Processing")
 
         valid_images = []
         file_paths = []
@@ -120,13 +118,15 @@ def run_consumer(gpu_id, batch_size):
 
         if invalid_ids:
             mark_batch_analysis_complete(conn, invalid_ids)
-            pbar.update(len(invalid_ids))
 
         if not valid_images:
             continue
 
         try:
-            results = model(file_paths, device=device, imgsz=IMG_SIZE, verbose=False, half=True)
+            # Inference: ultralytics handles batching internally if a list of paths is provided.
+            # For optimal speed with TensorRT, ensure the model was exported with dynamic=False 
+            # and the batch parameter matches your execution batch_size.
+            results = model(file_paths, device=device, imgsz=IMG_SIZE, verbose=False)
             
             detections_to_insert = []
             files_queued_for_deletion = 0
@@ -136,6 +136,8 @@ def run_consumer(gpu_id, batch_size):
                 db_img = valid_images[i]
                 orig_img_path = file_paths[i]
                 found_person = False
+                
+                # Fetch original image array returned by the predictor
                 img_array = result.orig_img
                 
                 processed_ids.append(db_img['id_image'])
@@ -155,7 +157,9 @@ def run_consumer(gpu_id, batch_size):
                         if crop.size > 0:
                             crop_filename = f"{db_img['id_image']}_p{len(detections_to_insert)}_{int(conf*100)}.jpg"
                             crop_full_path = os.path.join(CROP_DIR, crop_filename)
-                            cv2.imwrite(crop_full_path, crop)
+                            
+                            # Offload I/O write to thread pool
+                            executor.submit(write_crop_async, crop_full_path, crop)
                             
                             detections_to_insert.append({
                                 'id_city': db_img['id_city'],
@@ -179,10 +183,6 @@ def run_consumer(gpu_id, batch_size):
             batch_duration = t_end - t0
             total_images_processed += len(valid_images)
             total_session_time = t_end - session_start
-            
-            pbar.update(len(valid_images))
-            fps = len(valid_images) / batch_duration if batch_duration > 0 else 0
-            pbar.set_postfix(fps=f"{fps:.1f}", detections=len(detections_to_insert), deleted=files_queued_for_deletion)
 
             log_performance(
                 gpu_id, batch_size, len(valid_images), batch_duration,
@@ -190,17 +190,13 @@ def run_consumer(gpu_id, batch_size):
                 len(detections_to_insert), files_queued_for_deletion
             )
 
-            if not is_engine:
-                torch.cuda.empty_cache()
-
         except Exception as e:
-            pbar.write(f"[{gpu_id}] ERROR during inference: {e}")
+            print(f"[{gpu_id}] ERROR during inference: {e}")
             mark_batch_analysis_complete(conn, [img['id_image'] for img in valid_images])
-            pbar.update(len(valid_images))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', type=int, default=0)
-    parser.add_argument('--batch_size', type=int, default=16) 
+    parser.add_argument('--batch_size', type=int, default=16)
     args = parser.parse_args()
     run_consumer(args.gpu, args.batch_size)

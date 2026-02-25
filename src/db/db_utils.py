@@ -175,6 +175,53 @@ def claim_batch_for_analysis(conn, batch_size=32):
         print(f"Error claiming batch: {e}")
         return []
 
+def insert_detections_batch(conn, detections):
+    if not detections:
+        return
+    try:
+        with conn:
+            conn.executemany("""
+                INSERT INTO person_detected (
+                    id_city, id_image, captured_at, location, confidence, bbox_person, crop_path
+                )
+                VALUES (
+                    :id_city, :id_image, :captured_at, :location, :confidence, :bbox_person, :crop_path
+                )
+            """, detections)
+    except Exception as e:
+        print(f"Error inserting detections: {e}")
+
+def claim_batch_for_analysis(conn, batch_size=32):
+    try:
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("BEGIN IMMEDIATE")
+            query = f"""
+                SELECT id_image, id_city, captured_at, location, file_path_image 
+                FROM images_detected 
+                WHERE processing_status = 'pending' 
+                LIMIT {batch_size}
+            """
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            if not rows:
+                return []
+            
+            images = [dict(row) for row in rows]
+            ids_to_lock = [img['id_image'] for img in images]
+            placeholders = ','.join(['?'] * len(ids_to_lock))
+            
+            update_query = f"""
+                UPDATE images_detected 
+                SET processing_status = 'processing' 
+                WHERE id_image IN ({placeholders})
+            """
+            cursor.execute(update_query, ids_to_lock)
+            return images
+    except Exception as e:
+        print(f"Error claiming batch: {e}")
+        return []
+
 def mark_batch_analysis_complete(conn, image_ids):
     if not image_ids:
         return
@@ -201,3 +248,70 @@ def insert_detections_batch(conn, detections):
             """, detections)
     except Exception as e:
         print(f"Error inserting detections: {e}")
+
+def get_all_existing_image_ids(conn):
+    cursor = conn.cursor()
+    cursor.execute("SELECT id_image FROM images_detected")
+    rows = cursor.fetchall()
+    return {row['id_image'] for row in rows}
+
+def claim_detections_for_analysis(conn, batch_size=32):
+    try:
+        with conn:
+            cursor = conn.cursor()
+            
+            query = f"""
+                SELECT id_person, crop_path FROM person_detected 
+                WHERE clothing_status = 'pending' 
+                AND crop_path IS NOT NULL
+                LIMIT {batch_size}
+            """
+            cursor.execute(query)
+            rows = [dict(row) for row in cursor.fetchall()]
+            
+            if not rows:
+                return []
+            
+            ids_to_lock = [row['id_person'] for row in rows]
+            placeholders = ','.join(['?'] * len(ids_to_lock))
+            
+            update_query = f"""
+                UPDATE person_detected 
+                SET clothing_status = 'processing' 
+                WHERE id_person IN ({placeholders})
+            """
+            cursor.execute(update_query, ids_to_lock)
+            
+            return rows
+            
+    except Exception as e:
+        print(f"Error claiming detections: {e}")
+        return []
+
+def mark_clothing_analysis_complete(conn, detection_ids):
+    if not detection_ids: return
+    try:
+        with conn:
+            placeholders = ','.join(['?'] * len(detection_ids))
+            sql = f"UPDATE person_detected SET clothing_status = 'completed' WHERE id_person IN ({placeholders})"
+            conn.execute(sql, tuple(detection_ids))
+    except Exception as e:
+        print(f"Error marking clothing analysis complete: {e}")
+
+def insert_clothing_measurements(conn, measurements):
+    if not measurements: return
+    try:
+        with conn:
+            conn.executemany("""
+            INSERT INTO clothing_item_detected (
+                id_detection, category, confidence, 
+                color_h, color_s, color_v, texture_score, 
+                area_ratio, bbox_item
+            ) VALUES (
+                :id_detection, :category, :confidence, 
+                :color_h, :color_s, :color_v, :texture_score, 
+                :area_ratio, :bbox_item
+            )
+            """, measurements)
+    except Exception as e:
+        print(f"Error inserting measurements: {e}")

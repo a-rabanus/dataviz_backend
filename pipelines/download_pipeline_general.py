@@ -18,30 +18,19 @@ from src.db.db_utils import (
     get_db_connection, 
     get_and_lock_city_for_download, 
     mark_city_download_complete,
-    insert_image_records_batch,
-    get_existing_image_ids,
-    get_all_existing_image_ids
+    insert_image_records_batch
 )
 
 load_dotenv(os.path.join(PROJECT_ROOT, '.env'))
 MAPILLARY_TOKEN = os.getenv("MAPILLARY_TOKEN")
 IMAGE_ROOT_DIR = os.path.join(PROJECT_ROOT, "data", "raw_images")
-USER_AGENT = 'CityBoxFinder/1.0 (anton.rabanus@study.hs-duesseldorf.de)'
 
 TILE_SIZE = 0.02
 API_LIMIT = 2000
-SCANNER_WORKERS = 70
-DOWNLOAD_WORKERS = 140
+SCANNER_WORKERS = 50
+DOWNLOAD_WORKERS = 100
 DB_BATCH_SIZE = 50
 MIN_TILE_SIZE = 0.0005
-POI_MARGIN = 0.005
-
-POIS = [
-    "Altstadt", "Hauptbahnhof", "Marktplatz", "Fußgängerzone", 
-    "Universität", "Schule", "Einkaufszentrum", "Park", 
-    "Rathaus", "Zentraler Omnibusbahnhof", "Theater", 
-    "Stadion", "Promenade", "Museum", "Klinikum"
-]
 
 def tile_bbox(main_bbox, tile_size_deg=0.02):
     if isinstance(main_bbox, dict):
@@ -75,30 +64,6 @@ def split_tile(tile_bbox):
         [mid_lon, mid_lat, max_lon, max_lat]
     ]
 
-async def fetch_poi_bboxes(session, city_name):
-    bboxes = []
-    headers = {'User-Agent': USER_AGENT}
-    for poi in POIS:
-        query = f"{poi}, {city_name}"
-        url = f"https://nominatim.openstreetmap.org/search?q={query}&format=json&limit=1"
-        try:
-            async with session.get(url, headers=headers) as response:
-                if response.status == 200:
-                    data = await response.json()
-                    if data and data[0].get('boundingbox'):
-                        b = data[0]['boundingbox']
-                        expanded_bbox = [
-                            float(b[2]) - POI_MARGIN,
-                            float(b[0]) - POI_MARGIN,
-                            float(b[3]) + POI_MARGIN,
-                            float(b[1]) + POI_MARGIN 
-                        ]
-                        bboxes.append(expanded_bbox)
-        except Exception as e:
-            tqdm.write(f"NOMINATIM ERROR für '{query}': {e}")
-        await asyncio.sleep(1.1)
-    return bboxes
-
 async def fetch_images_in_tile(session, tile_bbox):
     bbox_str = f"{tile_bbox[0]:.6f},{tile_bbox[1]:.6f},{tile_bbox[2]:.6f},{tile_bbox[3]:.6f}"
     url = "https://graph.mapillary.com/images"
@@ -114,15 +79,21 @@ async def fetch_images_in_tile(session, tile_bbox):
                 data = await response.json()
                 results = data.get('data', [])
                 if results:
-                    tqdm.write(f"SCANNER: {len(results)} Bilder in Kachel gefunden.")
+                    tqdm.write(f"SCANNER: Found {len(results)} images in tile.")
                 return True, results
             elif response.status in (500, 502, 503, 504):
+                err_text = await response.text()
+                tqdm.write(f"SCANNER API HTTP {response.status} (Density/Timeout): {err_text}")
                 return False, []
             else:
+                err_text = await response.text()
+                tqdm.write(f"SCANNER API HTTP {response.status}: {err_text}")
                 return True, []
     except asyncio.TimeoutError:
+        tqdm.write("SCANNER API ERROR: Timeout")
         return False, []
-    except Exception:
+    except Exception as e:
+        tqdm.write(f"SCANNER API ERROR: {type(e).__name__}: {str(e)}")
         return False, []
 
 async def download_image_bytes(session, url, img_id):
@@ -130,8 +101,10 @@ async def download_image_bytes(session, url, img_id):
         async with session.get(url) as response:
             if response.status == 200:
                 return await response.read()
-    except Exception:
-        pass
+            else:
+                tqdm.write(f"DOWNLOADER HTTP {response.status} for image {img_id}")
+    except Exception as e:
+        tqdm.write(f"DOWNLOADER NET ERROR for image {img_id}: {type(e).__name__}")
     return None
 
 def write_file(path, content):
@@ -139,7 +112,8 @@ def write_file(path, content):
         with open(path, 'wb') as f:
             f.write(content)
         return True
-    except Exception:
+    except Exception as e:
+        print(f"IO ERROR writing {path}: {e}")
         return False
 
 async def worker_scanner(tile_queue, image_queue, session, seen_ids, pbar):
@@ -160,15 +134,24 @@ async def worker_scanner(tile_queue, image_queue, session, seen_ids, pbar):
                     tile_queue.put_nowait(st)
                 pbar.total += 3
                 pbar.refresh()
+                tqdm.write(f"SCANNER: Subdivided dense tile into 4 sub-tiles (new span: {lon_span/2:.5f}).")
+            else:
+                tqdm.write("SCANNER: Tile resolution limit reached. Dropping tile.")
+            
             pbar.update(1)
             tile_queue.task_done()
             continue
 
+        queued_count = 0
         for img in images:
             img_id = int(img['id'])
             if img_id not in seen_ids:
                 seen_ids.add(img_id)
                 await image_queue.put(img)
+                queued_count += 1
+        
+        if queued_count > 0:
+            tqdm.write(f"SCANNER: Queued {queued_count} new images. Queue size approx: {image_queue.qsize()}")
             
         pbar.update(1)
         tile_queue.task_done()
@@ -188,6 +171,7 @@ async def worker_downloader(image_queue, city_dir, city_id, db_conn, pbar):
             url = item.get('thumb_2048_url')
             
             if not url:
+                tqdm.write(f"DOWNLOADER: Missing URL for image {img_id}")
                 image_queue.task_done()
                 continue
                 
@@ -221,6 +205,7 @@ async def worker_downloader(image_queue, city_dir, city_id, db_conn, pbar):
             
             if len(db_buffer) >= DB_BATCH_SIZE:
                 insert_image_records_batch(db_conn, db_buffer)
+                tqdm.write(f"DOWNLOADER: Flushed {DB_BATCH_SIZE} records to DB.")
                 db_buffer = []
             
             image_queue.task_done()
@@ -228,64 +213,30 @@ async def worker_downloader(image_queue, city_dir, city_id, db_conn, pbar):
 async def process_city(city, db_conn):
     city_id = city['id_city']
     city_name = city['name']
-    print(f"\nVerarbeitung: {city_name}")
+    print(f"\nProcessing: {city_name}")
 
     city_dir = os.path.join(IMAGE_ROOT_DIR, city_name.replace(" ", "_").replace(",", ""))
-    os.makedirs(city_dir, exist_ok=True)
-
-    db_ids = get_existing_image_ids(db_conn, city_id)
-    disk_ids = {int(f.split('.')[0]) for f in os.listdir(city_dir) if f.endswith('.jpg')}
-
-    valid_local_ids = db_ids.intersection(disk_ids)
-
-    orphaned_db = db_ids - disk_ids
-    if orphaned_db:
-        print(f"Lösche {len(orphaned_db)} verwaiste Datenbankeinträge.")
-        with db_conn:
-            db_conn.executemany(
-                "DELETE FROM images_detected WHERE id_city = ? AND id_image = ?", 
-                [(city_id, oid) for oid in orphaned_db]
-            )
-
-    orphaned_disk = disk_ids - db_ids
-    if orphaned_disk:
-        print(f"Lösche {len(orphaned_disk)} verwaiste Dateien.")
-        for oid in orphaned_disk:
-            try:
-                os.remove(os.path.join(city_dir, f"{oid}.jpg"))
-            except OSError:
-                pass
-
-    global_ids = get_all_existing_image_ids(db_conn)
-    seen_ids = valid_local_ids.union(global_ids)
-
-    print("Frage Nominatim POIs ab...")
-    async with aiohttp.ClientSession() as session:
-        poi_bboxes = await fetch_poi_bboxes(session, city_name)
-
-    if not poi_bboxes:
-        print("Keine POIs gefunden. Nutze Zentrums-Fallback.")
-        main_bbox = city['bbox_cities']
-        center_lon = (main_bbox['west'] + main_bbox['east']) / 2
-        center_lat = (main_bbox['south'] + main_bbox['north']) / 2
-        poi_bboxes = [[center_lon - POI_MARGIN, center_lat - POI_MARGIN, center_lon + POI_MARGIN, center_lat + POI_MARGIN]]
-
-    unique_tiles = set()
-    for bbox in poi_bboxes:
-        for t in tile_bbox(bbox, tile_size_deg=TILE_SIZE):
-            unique_tiles.add(tuple(t))
     
-    tiles = [list(t) for t in unique_tiles]
-    print(f"{len(tiles)} einzigartige Kacheln über {len(poi_bboxes)} POI-Zonen generiert.")
+    if os.path.exists(city_dir):
+        print(f"Purging existing directory: {city_dir}")
+        shutil.rmtree(city_dir)
+    os.makedirs(city_dir)
 
+    print(f"Purging existing database records for city_id: {city_id}")
+    with db_conn:
+        db_conn.execute("DELETE FROM images_detected WHERE id_city = ?", (city_id,))
+
+    seen_ids = set()
+    
+    tiles = list(tile_bbox(city['bbox_cities'], tile_size_deg=TILE_SIZE))
     tile_queue = asyncio.Queue()
     for t in tiles:
         tile_queue.put_nowait(t)
 
     image_queue = asyncio.Queue(maxsize=10000)
 
-    scan_pbar = tqdm(total=len(tiles), desc="Kacheln scannen", unit="tile", position=0)
-    dl_pbar = tqdm(desc="Download", unit="img", position=1)
+    scan_pbar = tqdm(total=len(tiles), desc="Scanning Tiles", unit="tile", position=0)
+    dl_pbar = tqdm(desc="Downloading", unit="img", position=1)
 
     scanner_tasks = []
     async with aiohttp.ClientSession() as scan_session:
@@ -300,6 +251,7 @@ async def process_city(city, db_conn):
 
         await asyncio.gather(*scanner_tasks)
         scan_pbar.close()
+        tqdm.write("SCANNER PHASE COMPLETE. Waiting for downloaders to clear queue.")
 
         for _ in range(DOWNLOAD_WORKERS):
             await image_queue.put(None)
@@ -323,7 +275,7 @@ async def main():
         try:
             await process_city(city, conn)
         except Exception as e:
-            print(f"Kritischer Fehler bei {city['name']}: {e}")
+            print(f"Error on {city['name']}: {e}")
             time.sleep(5)
 
 if __name__ == "__main__":
