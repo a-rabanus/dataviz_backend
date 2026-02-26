@@ -265,7 +265,7 @@ class OptimizedProcessor:
                     tex_score = torch_texture_score(img_tensor, mask)
 
                     results.append({
-                        "id_detection": db_id,
+                        "id_person": db_id,
                         "category": str(cls_id),
                         "confidence": score,
                         "color_h": avg_h.item(),

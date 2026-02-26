@@ -38,7 +38,7 @@ def create_tables(conn):
     );
     CREATE TABLE IF NOT EXISTS "clothing_item_detected" (
         "id_item"	INTEGER,
-        "id_detection"	INTEGER,
+        "id_person"	INTEGER,
         "category"	VARCHAR(50),
         "confidence"	REAL,
         "color_h"	REAL,
@@ -304,11 +304,11 @@ def insert_clothing_measurements(conn, measurements):
         with conn:
             conn.executemany("""
             INSERT INTO clothing_item_detected (
-                id_detection, category, confidence, 
+                id_person, category, confidence, 
                 color_h, color_s, color_v, texture_score, 
                 area_ratio, bbox_item
             ) VALUES (
-                :id_detection, :category, :confidence, 
+                :id_person, :category, :confidence, 
                 :color_h, :color_s, :color_v, :texture_score, 
                 :area_ratio, :bbox_item
             )

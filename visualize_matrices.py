@@ -24,12 +24,10 @@ import os
 from matplotlib.colors import Normalize
 
 # --- Configuration ---
-DATA_DIR = "data/images/"
+DATA_DIR = ""
 FILES = [
-    "outfit_feature_matrix_mode-full.csv",
-    "item_feature_matrix_mode-full.csv",
-    "outfit_feature_matrix_mode-functional.csv",
-    "item_feature_matrix_mode-functional.csv"
+    "item_feature_matrix.csv",
+    "outfit_feature_matrix.csv",
 ]
 
 # Style for better point cloud visibility
