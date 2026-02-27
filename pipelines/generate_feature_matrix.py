@@ -1,20 +1,17 @@
+# pipeline/generate_feature_matrix.py
 import os
 import sqlite3
 import numpy as np
 import polars as pl
 import cv2
-import argparse
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
-from datetime import datetime
-from tqdm import tqdm
 
 DB_PATH = "data/pipeline.db"
 OUTPUT_DIR = "data/feature_matrices"
-SEED = 42
-BATCH_SIZE = 4096
+BATCH_SIZE = 16384
 EPOCHS = 15
 LEARNING_RATE = 1e-3
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -68,32 +65,25 @@ def train_autoencoder(features_np):
     model = Autoencoder(input_dim).to(DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
     criterion = nn.MSELoss()
+    scaler = torch.amp.GradScaler('cuda')
     
-    print(f"[{datetime.now()}] [GPU] Training Autoencoder (In: {input_dim} -> Latent: 2)...")
     model.train()
-    for epoch in range(EPOCHS):
-        total_loss = 0
+    for _ in range(EPOCHS):
         for batch in loader:
             x = batch[0]
             optimizer.zero_grad()
-            latent, reconstructed = model(x)
-            loss = criterion(reconstructed, x)
-            loss.backward()
-            optimizer.step()
-            total_loss += loss.item()
+            with torch.amp.autocast('cuda', dtype=torch.float16):
+                latent, reconstructed = model(x)
+                loss = criterion(reconstructed, x)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
 
     model.eval()
-    coordinates = []
-    inference_loader = DataLoader(TensorDataset(tensor_x), batch_size=BATCH_SIZE, shuffle=False)
     with torch.no_grad():
-        for batch in tqdm(inference_loader, desc="Generating Embeddings"):
-            x = batch[0]
-            latent, _ = model(x)
-            coordinates.append(latent.cpu().numpy())
-    return np.vstack(coordinates)
-
-def get_db_connection():
-    return sqlite3.connect(DB_PATH)
+        with torch.amp.autocast('cuda', dtype=torch.float16):
+            latent, _ = model(tensor_x)
+    return latent.cpu().numpy().astype(np.float32)
 
 def hsv_to_lab_opencv(hsv_array):
     h_scaled = hsv_array[:, 0] * 179
@@ -104,205 +94,163 @@ def hsv_to_lab_opencv(hsv_array):
     img_lab = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2Lab)
     return img_lab.reshape(-1, 3).astype(np.float32)
 
-def hsv_to_hex_array(hsv_array):
-    h_scaled = hsv_array[:, 0] * 179
-    s_scaled = hsv_array[:, 1] * 255
-    v_scaled = hsv_array[:, 2] * 255
-    img_hsv = np.dstack((h_scaled, s_scaled, v_scaled)).astype(np.uint8)
-    img_rgb = cv2.cvtColor(img_hsv, cv2.COLOR_HSV2RGB)
-    hex_list = ["#{:02x}{:02x}{:02x}".format(r, g, b) for r, g, b in img_rgb.reshape(-1, 3)]
-    return np.array(hex_list)
+def hsv_to_hex_vectorized(hsv_array):
+    h_scaled = (hsv_array[:, 0] * 179).astype(np.uint8)
+    s_scaled = (hsv_array[:, 1] * 255).astype(np.uint8)
+    v_scaled = (hsv_array[:, 2] * 255).astype(np.uint8)
+    
+    hsv_uint8 = np.stack([h_scaled, s_scaled, v_scaled], axis=1).reshape(-1, 1, 3)
+    rgb_uint8 = cv2.cvtColor(hsv_uint8, cv2.COLOR_HSV2RGB).reshape(-1, 3)
+    
+    hex_chars = np.array([f"#{r:02x}{g:02x}{b:02x}" for r, g, b in rgb_uint8])
+    return hex_chars
 
 def load_data():
-    print(f"[{datetime.now()}] Loading data from {DB_PATH}...")
-    conn = get_db_connection()
+    conn = sqlite3.connect(DB_PATH)
     query = """
         SELECT 
             c.id_item, 
-            c.id_person AS id_detection, 
+            c.id_person, 
             CAST(c.category AS INTEGER) AS category, 
-            c.confidence, 
-            c.color_h, 
-            c.color_s, 
-            c.color_v, 
-            c.texture_score, 
-            c.area_ratio, 
-            p.id_image,
-            p.crop_path,
-            i.captured_at,
+            c.color_h, c.color_s, c.color_v, 
+            c.texture_score, c.area_ratio, 
+            p.id_image, p.crop_path, p.captured_at,
+            CAST(json_extract(p.location, '$.coordinates[0]') AS REAL) AS lon,
+            CAST(json_extract(p.location, '$.coordinates[1]') AS REAL) AS lat,
             city.name AS full_city_name
         FROM clothing_item_detected c
         JOIN person_detected p ON c.id_person = p.id_person
-        JOIN images_detected i ON p.id_image = i.id_image
-        JOIN cities city ON i.id_city = city.id_city
+        JOIN cities city ON p.id_city = city.id_city
         WHERE c.category IS NOT NULL
     """
     df = pl.read_database(query, conn)
     conn.close()
-    
+
     df = df.with_columns([
-        (pl.lit("data/cropped_people/") + pl.col("crop_path").str.replace_all(r"\\", "/").str.split("/").list.last()).alias("crop_path"),
+        (pl.lit("data/cropped/people/") + pl.col("crop_path").str.replace_all(r"\\", "/").str.split("/").list.last()).alias("crop_path"),
         pl.col("captured_at").str.slice(0, 10).alias("date"),
-        pl.col("captured_at").str.slice(11, 2).alias("time"),
+        pl.col("captured_at").str.slice(11, 8).alias("time"),
         pl.col("full_city_name").str.split(",").list.get(0).str.strip_chars().alias("city"),
         pl.col("full_city_name").str.split(",").list.get(1).str.strip_chars().alias("state")
     ])
 
-    print(f"[{datetime.now()}] Loaded {len(df)} rows.")
+    df = df.with_columns(pl.col("captured_at").str.slice(0, 19).str.strptime(pl.Datetime, "%Y-%m-%d %H:%M:%S", strict=False).alias("dt_parsed"))
+
+    df = df.with_columns([
+        (np.cos(np.radians(pl.col("lat"))) * np.cos(np.radians(pl.col("lon")))).fill_null(0).alias("loc_x"),
+        (np.cos(np.radians(pl.col("lat"))) * np.sin(np.radians(pl.col("lon")))).fill_null(0).alias("loc_y"),
+        (np.sin(np.radians(pl.col("lat")))).fill_null(0).alias("loc_z"),
+        (np.sin(2 * np.pi * pl.col("dt_parsed").dt.month() / 12)).fill_null(0).alias("time_month_sin"),
+        (np.cos(2 * np.pi * pl.col("dt_parsed").dt.month() / 12)).fill_null(0).alias("time_month_cos"),
+        (np.sin(2 * np.pi * pl.col("dt_parsed").dt.weekday() / 7)).fill_null(0).alias("time_day_sin"),
+        (np.cos(2 * np.pi * pl.col("dt_parsed").dt.weekday() / 7)).fill_null(0).alias("time_day_cos"),
+        (np.sin(2 * np.pi * pl.col("dt_parsed").dt.hour() / 24)).fill_null(0).alias("time_hour_sin"),
+        (np.cos(2 * np.pi * pl.col("dt_parsed").dt.hour() / 24)).fill_null(0).alias("time_hour_cos"),
+        pl.col("category").cast(pl.String).alias("category_list") 
+    ])
     return df
 
-def process_item_matrix(df):
-    print(f"[{datetime.now()}] Processing Item Matrix...")
-    hsv = df.select(['color_h', 'color_s', 'color_v']).to_numpy()
-    lab = hsv_to_lab_opencv(hsv)
-    hex_colors = hsv_to_hex_array(hsv)
-    
-    features = np.hstack([
-        lab,
-        df['texture_score'].to_numpy().reshape(-1, 1),
-        df['area_ratio'].to_numpy().reshape(-1, 1)
-    ])
-    
-    embedding = train_autoencoder(features)
-    
-    output_df = df.select([
-        pl.col('id_item').alias('id'),
-        pl.col('category'),
-        pl.col('id_image'),
-        pl.col('crop_path'),
-        pl.col('date'),
-        pl.col('time'),
-        pl.col('city'),
-        pl.col('state')
-    ]).with_columns([
-        pl.Series(embedding[:, 0]).alias('x'),
-        pl.Series(embedding[:, 1]).alias('y'),
-        pl.Series(hex_colors).alias('color')
-    ])
-    
-    out_path = os.path.join(OUTPUT_DIR, "item_feature_matrix.csv")
-    output_df.write_csv(out_path)
-    print(f"[{datetime.now()}] Saved {out_path}")
-
-def generate_pairs():
-    pairs = []
-    cats = sorted(CATEGORY_MAP.keys())
-    for i in range(len(cats)):
-        for j in range(i + 1, len(cats)):
-            pairs.append((cats[i], cats[j]))
-    return sorted(list(set(pairs)))
-
-def process_outfit_matrix(df):
-    print(f"[{datetime.now()}] Processing Outfit Matrix...")
-    df_dedup = df.sort("confidence", descending=True).unique(subset=["id_detection", "category"])
-    
-    hsv = df_dedup.select(['color_h', 'color_s', 'color_v']).to_numpy()
-    lab = hsv_to_lab_opencv(hsv)
-    
-    df_dedup = df_dedup.with_columns([
-        pl.Series(lab[:, 0]).alias('L'),
-        pl.Series(lab[:, 1]).alias('A'),
-        pl.Series(lab[:, 2]).alias('B')
-    ])
-    
-    print(f"[{datetime.now()}] Pivoting data...")
-    df_dedup = df_dedup.with_columns(pl.col("category").cast(pl.String))
-    
-    pivot_df = df_dedup.pivot(
-        values=["L", "A", "B", "texture_score", "area_ratio"],
-        index="id_detection",
-        columns="category",
-        aggregate_function="first"
-    )
-    
-    meta_df = df_dedup.group_by("id_detection").agg([
-        pl.col("id_image").first(),
-        pl.col("crop_path").first(),
-        pl.col("date").first(),
-        pl.col("time").first(),
-        pl.col("city").first(),
-        pl.col("state").first(),
-        pl.col("category").alias("category_list")
-    ])
-    
-    pairs = generate_pairs()
-    print(f"[{datetime.now()}] Calculating features for {len(pairs)} pairs...")
-    
-    exprs = []
-    for c in CATEGORY_MAP.keys():
-        col_name = f"L_{c}"
-        if col_name in pivot_df.columns:
-            exprs.append(pl.col(col_name).is_not_null().cast(pl.Int8).alias(f"has_{c}"))
-        else:
-            exprs.append(pl.lit(0).alias(f"has_{c}"))
-            
-    for c1, c2 in tqdm(pairs, desc="Building Pair Expressions"):
-        c1, c2 = str(c1), str(c2)
-        if f"L_{c1}" not in pivot_df.columns or f"L_{c2}" not in pivot_df.columns:
-            exprs.append(pl.lit(None).cast(pl.Float32).alias(f"dist_color_{c1}_{c2}"))
-            exprs.append(pl.lit(None).cast(pl.Float32).alias(f"dist_tex_{c1}_{c2}"))
-            exprs.append(pl.lit(None).cast(pl.Float32).alias(f"dist_area_{c1}_{c2}"))
-            exprs.append(pl.lit(0).alias(f"has_pair_{c1}_{c2}"))
-            continue
-
-        color_dist = ((pl.col(f"L_{c1}") - pl.col(f"L_{c2}")).pow(2) + 
-                      (pl.col(f"A_{c1}") - pl.col(f"A_{c2}")).pow(2) + 
-                      (pl.col(f"B_{c1}") - pl.col(f"B_{c2}")).pow(2)).sqrt().alias(f"dist_color_{c1}_{c2}")
-        tex_dist = (pl.col(f"texture_score_{c1}") - pl.col(f"texture_score_{c2}")).abs().alias(f"dist_tex_{c1}_{c2}")
-        area_dist = (pl.col(f"area_ratio_{c1}") - pl.col(f"area_ratio_{c2}")).abs().alias(f"dist_area_{c1}_{c2}")
-        pair_flag = (pl.col(f"L_{c1}").is_not_null() & pl.col(f"L_{c2}").is_not_null()).cast(pl.Int8).alias(f"has_pair_{c1}_{c2}")
-        
-        exprs.extend([color_dist, tex_dist, area_dist, pair_flag])
-
-    features_df = pivot_df.with_columns(exprs)
-    
-    target_cols = [c for c in features_df.columns if c.startswith('dist_') or c.startswith('has_')]
-    dist_cols = [c for c in target_cols if c.startswith('dist_')]
-    flag_cols = [c for c in target_cols if c.startswith('has_')]
-    
-    print(f"[{datetime.now()}] Performing Mean Imputation...")
-    fill_exprs = []
-    for col in dist_cols:
-        fill_exprs.append(pl.col(col).fill_null(pl.col(col).mean()))
-    for col in flag_cols:
-        fill_exprs.append(pl.col(col).fill_null(0))
-        
-    final_features_df = features_df.with_columns(fill_exprs)
-    final_features_df = final_features_df.with_columns(pl.all().fill_null(0))
-    
-    feature_matrix = final_features_df.select(target_cols).to_numpy()
-    print(f"[{datetime.now()}] Feature Matrix Shape: {feature_matrix.shape}")
-    
-    embedding = train_autoencoder(feature_matrix)
-    
-    result_df = final_features_df.select("id_detection").with_columns([
-        pl.Series(embedding[:, 0]).alias('x'),
-        pl.Series(embedding[:, 1]).alias('y')
-    ])
-    
-    final_output = result_df.join(meta_df, on="id_detection", how="left")
-    final_output = final_output.rename({"id_detection": "id"})
-    final_output = final_output.with_columns(pl.col("category_list").list.join("|"))
-    
-    out_path = os.path.join(OUTPUT_DIR, "outfit_feature_matrix.csv")
-    final_output.write_csv(out_path)
-    print(f"[{datetime.now()}] Saved {out_path}")
-
-def main():
+def generate_matrices(df, mode="item"):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    if torch.cuda.is_available():
-        print(f"[{datetime.now()}] GPU Detected: {torch.cuda.get_device_name(0)}")
-    else:
-        print(f"[{datetime.now()}] WARNING: GPU not detected. Training will be slow.")
+    if mode == "item":
+        hsv_raw = df.select(['color_h', 'color_s', 'color_v']).to_numpy()
+        lab = hsv_to_lab_opencv(hsv_raw)
+        hex_colors = hsv_to_hex_vectorized(hsv_raw)
         
+        base_features = np.hstack([
+            lab,
+            df['texture_score'].to_numpy().reshape(-1, 1),
+            df['area_ratio'].to_numpy().reshape(-1, 1)
+        ])
+        loc_features = df.select(['loc_x', 'loc_y', 'loc_z']).to_numpy()
+        time_features = df.select(['time_month_sin', 'time_month_cos', 'time_day_sin', 'time_day_cos', 'time_hour_sin', 'time_hour_cos']).to_numpy()
+        
+        meta = df.select(['id_item', 'id_image', 'crop_path', 'date', 'time', 'city', 'state', 'category_list']).rename({"id_item": "id"})
+        meta = meta.with_columns(pl.Series("color", hex_colors))
+        prefix = "item"
+
+    elif mode == "outfit":
+        df_dedup = df.sort("texture_score", descending=True).unique(subset=["id_person", "category"])
+        hsv_raw = df_dedup.select(['color_h', 'color_s', 'color_v']).to_numpy()
+        lab = hsv_to_lab_opencv(hsv_raw)
+        
+        # We define outfit color as the color of the most prominent item in the outfit (by area)
+        df_dominant = df_dedup.sort("area_ratio", descending=True).unique(subset=["id_person"])
+        hsv_dom = df_dominant.select(['color_h', 'color_s', 'color_v']).to_numpy()
+        dom_hex = hsv_to_hex_vectorized(hsv_dom)
+        dom_map = pl.DataFrame({"id": df_dominant["id_person"], "color": dom_hex})
+
+        df_dedup = df_dedup.with_columns([
+            pl.Series(lab[:, 0]).alias('L'), pl.Series(lab[:, 1]).alias('A'), pl.Series(lab[:, 2]).alias('B')
+        ])
+        
+        pivot_df = df_dedup.pivot(
+            values=["L", "A", "B", "texture_score", "area_ratio"],
+            index="id_person", columns="category", aggregate_function="first"
+        )
+        
+        exprs = []
+        for c1 in CATEGORY_MAP.keys():
+            for c2 in range(c1 + 1, max(CATEGORY_MAP.keys()) + 1):
+                c1_str, c2_str = str(c1), str(c2)
+                if f"L_{c1_str}" not in pivot_df.columns or f"L_{c2_str}" not in pivot_df.columns:
+                    continue
+                exprs.extend([
+                    ((pl.col(f"L_{c1_str}") - pl.col(f"L_{c2_str}")).pow(2) + 
+                     (pl.col(f"A_{c1_str}") - pl.col(f"A_{c2_str}")).pow(2) + 
+                     (pl.col(f"B_{c1_str}") - pl.col(f"B_{c2_str}")).pow(2)).sqrt().fill_null(0).alias(f"dist_color_{c1}_{c2}"),
+                    (pl.col(f"texture_score_{c1_str}") - pl.col(f"texture_score_{c2_str}")).abs().fill_null(0).alias(f"dist_tex_{c1}_{c2}"),
+                    (pl.col(f"area_ratio_{c1_str}") - pl.col(f"area_ratio_{c2_str}")).abs().fill_null(0).alias(f"dist_area_{c1}_{c2}"),
+                    (pl.col(f"L_{c1_str}").is_not_null() & pl.col(f"L_{c2_str}").is_not_null()).cast(pl.Int8).fill_null(0).alias(f"has_pair_{c1}_{c2}")
+                ])
+        
+        features_df = pivot_df.with_columns(exprs).fill_null(0).sort("id_person")
+        target_cols = [c for c in features_df.columns if c.startswith('dist_') or c.startswith('has_')]
+        
+        meta = df_dedup.group_by("id_person").agg([
+            pl.col("id_image").first(), pl.col("crop_path").first(), pl.col("date").first(), pl.col("time").first(),
+            pl.col("city").first(), pl.col("state").first(),
+            pl.col("category").cast(pl.String).alias("cat_list"),
+            pl.col("loc_x").first(), pl.col("loc_y").first(), pl.col("loc_z").first(),
+            pl.col("time_month_sin").first(), pl.col("time_month_cos").first(), pl.col("time_day_sin").first(),
+            pl.col("time_day_cos").first(), pl.col("time_hour_sin").first(), pl.col("time_hour_cos").first()
+        ]).with_columns([
+            pl.col("cat_list").list.join("|").alias("category_list")
+        ]).rename({"id_person": "id"}).sort("id")
+        
+        meta = meta.join(dom_map, on="id", how="left")
+        
+        base_features = features_df.select(target_cols).to_numpy()
+        loc_features = meta.select(['loc_x', 'loc_y', 'loc_z']).to_numpy()
+        time_features = meta.select(['time_month_sin', 'time_month_cos', 'time_day_sin', 'time_day_cos', 'time_hour_sin', 'time_hour_cos']).to_numpy()
+        meta = meta.drop(['cat_list', 'loc_x', 'loc_y', 'loc_z', 'time_month_sin', 'time_month_cos', 'time_day_sin', 'time_day_cos', 'time_hour_sin', 'time_hour_cos'])
+        prefix = "outfit"
+
+    configs = [
+        ("base", base_features),
+        ("time", np.hstack([base_features, time_features])),
+        ("loc", np.hstack([base_features, loc_features])),
+        ("time_loc", np.hstack([base_features, time_features, loc_features]))
+    ]
+
+    for suffix, matrix in configs:
+        latent = train_autoencoder(matrix)
+        out = meta.with_columns([
+            pl.Series("x", latent[:, 0]),
+            pl.Series("y", latent[:, 1])
+        ])
+        
+        out = out.select(["id", "x", "y", "id_image", "crop_path", "date", "time", "city", "state", "category_list", "color"])
+        out.write_csv(os.path.join(OUTPUT_DIR, f"{prefix}_{suffix}.csv"))
+
+def main():
+    torch.backends.cudnn.benchmark = True
     df = load_data()
     if df.is_empty():
-        print("Database is empty or no valid detections found.")
         return
-        
-    process_item_matrix(df)
-    process_outfit_matrix(df)
+    generate_matrices(df, mode="item")
+    generate_matrices(df, mode="outfit")
 
 if __name__ == "__main__":
     main()
