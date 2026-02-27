@@ -1,3 +1,5 @@
+"""Executes clothing instance segmentation, extracts HSV/texture features, and refines classification using pose keypoints via Detectron2."""
+
 import os
 import sys
 import cv2
@@ -59,6 +61,7 @@ CLOTHING_ANATOMY = {
 }
 
 def torch_rgb_to_hsv(image_tensor):
+    """Converts a normalized RGB image tensor to an HSV tensor."""
     img = image_tensor / 255.0
     r, g, b = img[0], img[1], img[2]
     max_val, _ = img.max(dim=0)
@@ -84,6 +87,7 @@ def torch_rgb_to_hsv(image_tensor):
     return torch.stack([h, s, v], dim=0)
 
 def torch_texture_score(image_tensor, mask_tensor):
+    """Calculates texture score via Laplacian variance on masked image regions."""
     gray = 0.299 * image_tensor[0] + 0.587 * image_tensor[1] + 0.114 * image_tensor[2]
     gray = gray.unsqueeze(0).unsqueeze(0)
     kernel = torch.tensor([[[[0, 1, 0], [1, -4, 1], [0, 1, 0]]]], device=image_tensor.device, dtype=torch.float32)
@@ -94,6 +98,7 @@ def torch_texture_score(image_tensor, mask_tensor):
     return torch.var(masked_lap).item() / 1000.0
 
 class ClothingDataset(Dataset):
+    """PyTorch Dataset for loading and resizing cropped human images."""
     def __init__(self, db_rows):
         self.rows = db_rows
 
@@ -133,6 +138,7 @@ def collate_fn(batch):
     return [x for x in batch if x is not None]
 
 class OptimizedProcessor:
+    """Manages Detectron2 mask and keypoint model inference."""
     def __init__(self):
         cfg_f = get_cfg()
         cfg_f.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
@@ -151,6 +157,7 @@ class OptimizedProcessor:
         DetectionCheckpointer(self.model_p).load(model_zoo.get_checkpoint_url("COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml"))
 
     def check_joints(self, mask, keypoints, joint_names):
+        """Verifies if specified anatomical joints overlap with the instance mask."""
         for name in joint_names:
             for side in ["L_", "R_"]:
                 full_name = side + name
@@ -164,6 +171,7 @@ class OptimizedProcessor:
         return False
 
     def refine_class(self, original_class, mask, keypoints):
+        """Adjusts clothing classification based on anatomical keypoint constraints."""
         if original_class not in CLOTHING_ANATOMY:
             return original_class, "No Rules"
 
@@ -189,6 +197,7 @@ class OptimizedProcessor:
         return original_class, "Geometry Mismatch"
 
     def process_batch(self, batched_inputs):
+        """Executes inference, applies NMS, refines classes, and calculates color/texture metrics."""
         results = []
         with torch.no_grad():
             preds_f = self.model_f(batched_inputs)

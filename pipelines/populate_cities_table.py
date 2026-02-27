@@ -1,3 +1,5 @@
+"""Queries Nominatim API to acquire bounding boxes for target cities and initializes database records."""
+
 import os
 import sys
 import time
@@ -17,6 +19,7 @@ USER_AGENT = os.getenv("USER_AGENT")
 CSV_PATH = os.path.join(PROJECT_ROOT, 'data', 'worldcities.csv')
 
 def get_city_bbox(city_name, headers):
+    """Requests and extracts geographic bounding box coordinates for a specified city name."""
     url = f"https://nominatim.openstreetmap.org/search?q={requests.utils.quote(city_name)}&format=json&limit=5"
     try:
         response = requests.get(url, headers=headers, timeout=10)
@@ -48,6 +51,7 @@ def get_city_bbox(city_name, headers):
         return None
 
 def extract_cities():
+    """Filters a static CSV to identify German cities within the target population range."""
     df = pd.read_csv(CSV_PATH)
     filtered = df[
         (df['country'].str.contains('germany', case=False, na=False)) &

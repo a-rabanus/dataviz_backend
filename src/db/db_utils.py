@@ -1,3 +1,5 @@
+"""Provides SQLite connection management, schema creation, and concurrent data access functions."""
+
 import sqlite3
 import os
 from sqlite3 import Error
@@ -8,6 +10,7 @@ DB_DIR = os.path.join(PROJECT_ROOT, 'data')
 DB_PATH = os.path.join(DB_DIR, 'pipeline.db')
 
 def get_db_connection(timeout=30.0):
+    """Initializes and returns a WAL-enabled SQLite database connection."""
     os.makedirs(DB_DIR, exist_ok=True)
     try:
         conn = sqlite3.connect(DB_PATH, timeout=timeout)
@@ -21,6 +24,7 @@ def get_db_connection(timeout=30.0):
         return None
 
 def create_tables(conn):
+    """Executes DDL statements to construct the pipeline schema."""
     schema = """
     BEGIN TRANSACTION;
     CREATE TABLE IF NOT EXISTS "cities" (
@@ -88,6 +92,7 @@ def create_tables(conn):
         print(f"ERROR: Failed to create tables: {e}")
 
 def get_and_lock_city_for_download(conn):
+    """Retrieves and locks a single pending city record for asynchronous download processing."""
     try:
         with conn:
             cursor = conn.cursor()
@@ -116,6 +121,7 @@ def get_and_lock_city_for_download(conn):
         return None
 
 def mark_city_download_complete(conn, city_id):
+    """Sets city download_status to 'done' and updates the downloaded_at timestamp."""
     try:
         with conn:
             conn.execute(
@@ -126,12 +132,14 @@ def mark_city_download_complete(conn, city_id):
         print(f"Error marking city complete: {e}")
 
 def get_existing_image_ids(conn, city_id):
+    """Retrieves id_image values for a specific city as a set."""
     cursor = conn.cursor()
     cursor.execute("SELECT id_image FROM images_detected WHERE id_city = ?", (city_id,))
     rows = cursor.fetchall()
     return {row['id_image'] for row in rows}
 
 def insert_image_records_batch(conn, records):
+    """Upserts a batch of image metadata records setting processing_status to 'pending'."""
     if not records:
         return
     try:
@@ -145,6 +153,7 @@ def insert_image_records_batch(conn, records):
         print(f"Error bulk inserting images: {e}")
 
 def claim_batch_for_analysis(conn, batch_size=32):
+    """Retrieves and locks a batch of pending image records for YOLO detection."""
     try:
         with conn:
             cursor = conn.cursor()
@@ -192,6 +201,7 @@ def insert_detections_batch(conn, detections):
         print(f"Error inserting detections: {e}")
 
 def claim_batch_for_analysis(conn, batch_size=32):
+    """Retrieves and locks a batch of pending person crops for Detectron2 clothing analysis."""
     try:
         with conn:
             cursor = conn.cursor()
@@ -223,6 +233,7 @@ def claim_batch_for_analysis(conn, batch_size=32):
         return []
 
 def mark_batch_analysis_complete(conn, image_ids):
+    """Updates processing_status to 'completed' for specified image IDs."""
     if not image_ids:
         return
     try:
@@ -234,6 +245,7 @@ def mark_batch_analysis_complete(conn, image_ids):
         print(f"Error marking batch complete: {e}")
 
 def insert_detections_batch(conn, detections):
+    """Inserts a batch of person detection records into person_detected table."""
     if not detections:
         return
     try:
@@ -250,12 +262,14 @@ def insert_detections_batch(conn, detections):
         print(f"Error inserting detections: {e}")
 
 def get_all_existing_image_ids(conn):
+    """Retrieves all global id_image values from the images_detected table as a set."""
     cursor = conn.cursor()
     cursor.execute("SELECT id_image FROM images_detected")
     rows = cursor.fetchall()
     return {row['id_image'] for row in rows}
 
 def claim_detections_for_analysis(conn, batch_size=32):
+    """Retrieves pending person detections with valid crop paths and updates status to 'processing'."""
     try:
         with conn:
             cursor = conn.cursor()
@@ -289,6 +303,7 @@ def claim_detections_for_analysis(conn, batch_size=32):
         return []
 
 def mark_clothing_analysis_complete(conn, detection_ids):
+    """Updates clothing_status to 'completed' for specified person detection IDs."""
     if not detection_ids: return
     try:
         with conn:
@@ -299,6 +314,7 @@ def mark_clothing_analysis_complete(conn, detection_ids):
         print(f"Error marking clothing analysis complete: {e}")
 
 def insert_clothing_measurements(conn, measurements):
+    """Inserts a batch of clothing categorization and measurement records."""
     if not measurements: return
     try:
         with conn:

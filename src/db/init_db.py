@@ -1,3 +1,5 @@
+"""Executes SQLite database schema initialization."""
+
 import sys
 import os
 
