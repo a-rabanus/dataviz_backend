@@ -1,4 +1,5 @@
-# pipeline/visualize_matrices.py
+"""Generates high-resolution scatter plots from 2D latent feature matrices."""
+
 import polars as pl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,6 +12,7 @@ MARKER_SIZE = 0.05
 ALPHA = 0.3
 
 def visualize_file(filepath, filename):
+    """Reads latent coordinates and renders an 8K scatter plot colored by category or outfit item count."""
     print(f"[LOAD] Reading {filename}...")
     df = pl.read_csv(filepath)
     

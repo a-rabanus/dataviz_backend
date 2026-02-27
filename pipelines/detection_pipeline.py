@@ -1,3 +1,5 @@
+"""Executes human detection on image batches using YOLOv8, extracts cropped bounding boxes, and records metadata."""
+
 import os
 import sys
 import cv2
@@ -48,6 +50,7 @@ def write_crop_async(path, crop_array):
         print(f"Error saving crop {path}: {e}")
 
 def log_performance(gpu_id, batch_size, images_count, duration, total_imgs, total_time, people_found, files_deleted):
+    """Appends batch processing metrics to the performance CSV log."""
     file_exists = os.path.isfile(LOG_FILE)
     current_fps = images_count / duration if duration > 0 else 0
     avg_fps = total_imgs / total_time if total_time > 0 else 0
@@ -66,6 +69,7 @@ def log_performance(gpu_id, batch_size, images_count, duration, total_imgs, tota
     print(f"[{gpu_id}] Found {people_found} people. Deleted {files_deleted} empty files.\n" + "-" * 50)
 
 def resolve_model(batch_size):
+    """Locates and returns the path to the optimal YOLO model (TensorRT engine or PyTorch fallback)."""
     engine_path = os.path.join(MODELS_DIR, f"yolov8n_batch{batch_size}.engine")
     if os.path.exists(engine_path):
         return engine_path
@@ -78,6 +82,7 @@ def resolve_model(batch_size):
     sys.exit(f"ERROR: No model found in {MODELS_DIR}. Ensure yolov8n.pt or .engine exists.")
 
 def run_consumer(gpu_id, batch_size):
+    """Pulls unanalyzed images from the database, runs YOLO detection, crops instances, and updates database state."""
     device = f'cuda:{gpu_id}'
     model_file = resolve_model(batch_size)
 

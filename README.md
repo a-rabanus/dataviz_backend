@@ -1,98 +1,60 @@
-# Urban Fashion Mapping Pipeline
+# Mapillary Urban Clothing and Person Detection Pipeline
 
-Project inspired by meme starterkits, applying data science to urban fashion trends by analyzing street-level imagery and generating 2D semantic embedding spaces.
+## Core Architecture
 
-## Pipeline Implementation
+Automated data pipeline for downloading street-level imagery, detecting pedestrians, extracting clothing segmentation features, and reducing dimensionality for latent space visualization.
 
-The system consists of independent modules synchronized via a SQLite database `pipeline.db`.
+## Module Definitions
 
-### 1. Geographic Scoping
+* **Database Management (`init_db.py`, `db_utils.py`)**:
+Constructs SQLite schema and manages asynchronous state transitions. Enforces WAL mode and concurrency locks for parallel workers.
+* **Geographic Seeding (`populate_cities_table.py`)**:
+Filters target cities by population parameters and queries the Nominatim API to extract and store geographic bounding boxes.
+* **Image Acquisition (`download_pipeline.py`)**:
+Executes concurrent asynchronous requests to the Mapillary API. Implements coordinate grid tiling and Nominatim POI targeting to optimize image retrieval density.
+* **Pedestrian Detection (`detection_pipeline.py`)**:
+Processes image batches through YOLOv8. Extracts bounding box crops of detected persons and logs performance metrics. Deletes source images lacking target classes.
+* **Clothing Segmentation (`clothing_analysis_pipeline.py`)**:
+Ingests person crops into Detectron2. Evaluates Mask R-CNN segmentation against Keypoint R-CNN anatomical constraints to eliminate invalid garments. Calculates HSV color distribution, spatial area ratios, and Laplacian texture variance.
+* **Dimensionality Reduction (`generate_feature_matrix.py`)**:
+Aggregates spatiotemporal and visual features. Trains PyTorch autoencoders to compress high-dimensional item and outfit representations into 2D latent space coordinates.
+* **Data Visualization (`visualize_matrices.py`)**:
+Consumes output matrices to render 8K resolution scatter plots mapped by clothing category and outfit composition.
 
-* **Scripts:** `pipelines/cities_generator.py`, `image_tools.py`
-* **Data Source:** `assets/worldcities.csv` (SimpleMaps) and Nominatim API.
-* **Logic:** Filters for cities with population > 500k. Generates JSON bounding boxes for target areas.
-* **Output:** Bounding boxes stored in the `cities` table.
+## Execution Sequence
 
-### 2. Image Acquisition
+1. Initialize database: `python init_db.py`
+2. Seed geographic targets: `python populate_cities_table.py`
+3. Acquire raw images: `python download_pipeline.py` (Requires `MAPILLARY_TOKEN` in `.env`)
+4. Generate person crops: `python detection_pipeline.py --gpu 0 --batch_size 16`
+5. Extract clothing features: `python clothing_analysis_pipeline.py`
+6. Train autoencoders: `python generate_feature_matrix.py`
+7. Render plots: `python visualize_matrices.py`
 
-* **Scripts:** `run_download_pipeline.py`
-* **API:** Mapillary API.
-* **Logic:** Breaks city bounding boxes into subtiles (max 2sqkm) for API compliance.
-* **Storage:** Images saved to `mapillary_images/`. Metadata recorded in `images_detected`.
+## System Prerequisites
+* **Operating System**: Linux
+* **Hardware**: CUDA-capable GPU required for YOLOv8 and Detectron2 inference.
 
-### 3. Pedestrian Detection & Cropping
+## Environment Setup
+1.  Initialize a Python virtual environment:
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+2.  Install dependencies from `requirements.txt`. Specify the PyTorch CUDA 12.1 index for hardware acceleration:
+    ```bash
+    pip install -r requirements.txt --extra-index-url [https://download.pytorch.org/whl/cu121](https://download.pytorch.org/whl/cu121)
+    ```
+3.  Install Detectron2 from the repository source if it fails to resolve via PyPI:
+    ```bash
+    python -m pip install 'git+[https://github.com/facebookresearch/detectron2.git](https://github.com/facebookresearch/detectron2.git)'
+    ```
 
-* **Scripts:** `run_detection_pipeline.py`
-* **Model:** YOLOv8.
-* **Logic:** Detects pedestrians in downloaded imagery. Uses detection bounding boxes to crop individuals.
-* **Storage:** Cropped images saved to `cropped_people/`. Entries added to `person_detected`.
-
-### 4. Clothing Analysis
-
-* **Scripts:** `run_clothing_analysis.py`
-* **Model:** Detectron2 (trained on DeepFashion2).
-* **Logic:** Extracts clothing type, color, and texture from cropped images.
-* **Output:** Attributes stored in `clothing_item_detected`.
-
-### 5. Feature Matrix Generation
-
-* **Scripts:** `generate_feature_matrices.py`
-* **Method:** Deep Autoencoder.
-* **Logic:** Compresses high-dimensional clothing vectors into a 2D latent space.
-* **Output:** `.csv` file formatted for frontend visualization.
-
----
-
-## Frontend & UI
-
-A Svelte 5 application utilizing Cosmos.gl for high-performance WebGL point cloud rendering.
-
-### Architecture
-
-* **Physics-Driven Graph:** Transitioned from static geometric layouts to a force-directed system. Points represent clothing items; layout is determined by simulated springs and repulsion.
-* **Lifecycle Management:** Uses Svelte `onMount` and `bind:this` to manage the imperative Cosmos.gl engine within a declarative framework.
-* **Memory Management:** Implements `graph.destroy()` on component unmount to clear GPU resources.
-
-### Tech Stack
-
-| Library | Version | Detail |
-| --- | --- | --- |
-| svelte | 5.46.0 | Snippet/Children patterns for layout management |
-| @cosmos.gl/graph | 2.6.2 | GPU-accelerated graph simulation |
-| vite | 6.4.1 | Build and import analysis |
-
----
-
-## Performance and Monitoring
-
-The following tools are used to identify resource-heavy elements and optimize the visualization:
-
-* [rStats](https://spite.github.io/rstats/)
-* [stats.js](https://github.com/mrdoob/stats.js)
-
----
-
-## Environment Configuration
-
-Create a `.env` file in the root directory:
-
-```ini
-MAPILLARY_ACCESS_TOKEN="YOUR_TOKEN_HERE"
-
+## Configuration
+Define API and client environment variables. Create a `.env` file in the project root containing:
+```env
+MAPILLARY_TOKEN=<your_mapillary_api_token>
+USER_AGENT=<your_custom_user_agent_string>
 ```
 
-## Database Schema
-
-The system uses `src/db/db_utils.py` for all database interactions. The schema includes:
-
-* `cities`: Geographic boundaries and scan status.
-* `images_detected`: Raw Mapillary image metadata.
-* `person_detected`: Links cropped images to original sources.
-* `clothing_item_detected`: Extracted features and attributes.
-
----
-
-## References
-
-* [DeepFashion2 Dataset](https://github.com/switchablenorms/DeepFashion2)
-* [Figma Design Prototype](https://www.figma.com/design/xWFdUtSlsngfeJKi33LZEx/Portfolio?node-id=0-1&t=JhhHZ7DehM6H0LSy-1)
+_Note: The Mapillary Token is mandatory for download_pipeline.py execution. The User Agent is mandatory for Nominatim API queries in populate_cities_table.py._

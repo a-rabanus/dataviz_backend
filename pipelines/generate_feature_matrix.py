@@ -1,4 +1,5 @@
-# pipeline/generate_feature_matrix.py
+"""Trains PyTorch autoencoders to reduce clothing and outfit features into 2D latent spaces."""
+
 import os
 import sqlite3
 import numpy as np
@@ -24,6 +25,7 @@ CATEGORY_MAP = {
 }
 
 class Autoencoder(nn.Module):
+    """Defines a fully connected encoder-decoder architecture for dimensionality reduction."""
     def __init__(self, input_dim):
         super(Autoencoder, self).__init__()
         l1 = 256 if input_dim > 10 else 64
@@ -53,6 +55,7 @@ class Autoencoder(nn.Module):
         return encoded, decoded
 
 def train_autoencoder(features_np):
+    """Normalizes input features and trains the autoencoder to produce a 2D latent representation."""
     input_dim = features_np.shape[1]
     mean = np.mean(features_np, axis=0)
     std = np.std(features_np, axis=0) + 1e-8
@@ -106,6 +109,7 @@ def hsv_to_hex_vectorized(hsv_array):
     return hex_chars
 
 def load_data():
+    """Extracts, parses, and formats clothing measurements and spatio-temporal data from the database."""
     conn = sqlite3.connect(DB_PATH)
     query = """
         SELECT 
@@ -151,6 +155,7 @@ def load_data():
     return df
 
 def generate_matrices(df, mode="item"):
+    """Compiles visual, spatial, and temporal features into configured matrices and executes autoencoder training."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     if mode == "item":

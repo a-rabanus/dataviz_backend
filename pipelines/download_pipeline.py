@@ -1,3 +1,5 @@
+"""Asynchronously fetches and downloads Mapillary images using bounding box tiling and Nominatim POIs."""
+
 import os
 import sys
 import math
@@ -26,7 +28,7 @@ from src.db.db_utils import (
 load_dotenv(os.path.join(PROJECT_ROOT, '.env'))
 MAPILLARY_TOKEN = os.getenv("MAPILLARY_TOKEN")
 IMAGE_ROOT_DIR = os.path.join(PROJECT_ROOT, "data", "raw_images")
-USER_AGENT = 'CityBoxFinder/1.0 (anton.rabanus@study.hs-duesseldorf.de)'
+USER_AGENT = os.getenv("USER_AGENT")
 
 TILE_SIZE = 0.02
 API_LIMIT = 2000
@@ -44,6 +46,7 @@ POIS = [
 ]
 
 def tile_bbox(main_bbox, tile_size_deg=0.02):
+    """Divides a master bounding box into smaller coordinate grids."""
     if isinstance(main_bbox, dict):
         min_lon, min_lat = main_bbox['west'], main_bbox['south']
         max_lon, max_lat = main_bbox['east'], main_bbox['north']
@@ -65,6 +68,7 @@ def tile_bbox(main_bbox, tile_size_deg=0.02):
             yield [x0, y0, x1, y1]
 
 def split_tile(tile_bbox):
+    """Subdivides a single bounding box into four quadrants."""
     min_lon, min_lat, max_lon, max_lat = tile_bbox
     mid_lon = (min_lon + max_lon) / 2.0
     mid_lat = (min_lat + max_lat) / 2.0
@@ -76,6 +80,7 @@ def split_tile(tile_bbox):
     ]
 
 async def fetch_poi_bboxes(session, city_name):
+    """Queries Nominatim API for bounding boxes of specified Points of Interest within a city."""
     bboxes = []
     headers = {'User-Agent': USER_AGENT}
     for poi in POIS:
@@ -100,6 +105,7 @@ async def fetch_poi_bboxes(session, city_name):
     return bboxes
 
 async def fetch_images_in_tile(session, tile_bbox):
+    """Requests Mapillary image metadata within a specific coordinate grid."""
     bbox_str = f"{tile_bbox[0]:.6f},{tile_bbox[1]:.6f},{tile_bbox[2]:.6f},{tile_bbox[3]:.6f}"
     url = "https://graph.mapillary.com/images"
     headers = {'Authorization': f'OAuth {MAPILLARY_TOKEN}'}
@@ -143,6 +149,7 @@ def write_file(path, content):
         return False
 
 async def worker_scanner(tile_queue, image_queue, session, seen_ids, pbar):
+    """Consumes coordinate tiles, queries the Mapillary API, and queues distinct image metadata for download."""
     while True:
         try:
             tile = tile_queue.get_nowait()
@@ -174,6 +181,7 @@ async def worker_scanner(tile_queue, image_queue, session, seen_ids, pbar):
         tile_queue.task_done()
 
 async def worker_downloader(image_queue, city_dir, city_id, db_conn, pbar):
+    """Consumes image metadata, downloads thumbnail binaries, and writes records to the database."""
     db_buffer = []
     async with aiohttp.ClientSession() as session:
         while True:
