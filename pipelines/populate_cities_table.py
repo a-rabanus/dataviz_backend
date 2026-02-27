@@ -13,7 +13,7 @@ if PROJECT_ROOT not in sys.path:
 
 from src.db.db_utils import get_db_connection, create_tables
 
-USER_AGENT = 'CityBoxFinder/1.0 (anton.rabanus@study.hs-duesseldorf.de)'
+USER_AGENT = os.getenv("USER_AGENT")
 CSV_PATH = os.path.join(PROJECT_ROOT, 'data', 'worldcities.csv')
 
 def get_city_bbox(city_name, headers):
