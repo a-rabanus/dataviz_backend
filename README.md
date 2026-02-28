@@ -30,8 +30,8 @@ Consumes output matrices to render 8K resolution scatter plots mapped by clothin
 5. Extract clothing features: `python clothing_analysis_pipeline.py`
 6. Train autoencoders: `python generate_feature_matrix.py`
 7. Render plots: `python visualize_matrices.py`
-
-## System Prerequisites
+k
+## System Prerequisitesk
 * **Operating System**: Linux
 * **Hardware**: CUDA-capable GPU required for YOLOv8 and Detectron2 inference.
 
