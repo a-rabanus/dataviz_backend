@@ -6,21 +6,37 @@ Automated data pipeline for downloading street-level imagery, detecting pedestri
 
 ## Module Definitions
 
-* **Database Management (`init_db.py`, `db_utils.py`)**:
-Constructs SQLite schema and manages asynchronous state transitions. Enforces WAL mode and concurrency locks for parallel workers.
-* **Geographic Seeding (`populate_cities_table.py`)**:
-Filters target cities by population parameters and queries the Nominatim API to extract and store geographic bounding boxes.
-* **Image Acquisition (`download_pipeline.py`)**:
-Executes concurrent asynchronous requests to the Mapillary API. Implements coordinate grid tiling and Nominatim POI targeting to optimize image retrieval density.
-* **Pedestrian Detection (`detection_pipeline.py`)**:
-Processes image batches through YOLOv8. Extracts bounding box crops of detected persons and logs performance metrics. Deletes source images lacking target classes.
-* **Clothing Segmentation (`clothing_analysis_pipeline.py`)**:
-Ingests person crops into Detectron2. Evaluates Mask R-CNN segmentation against Keypoint R-CNN anatomical constraints to eliminate invalid garments. Calculates HSV color distribution, spatial area ratios, and Laplacian texture variance.
-* **Dimensionality Reduction (`generate_feature_matrix.py`)**:
-Aggregates spatiotemporal and visual features. Trains PyTorch autoencoders to compress high-dimensional item and outfit representations into 2D latent space coordinates.
-* **Data Visualization (`visualize_matrices.py`)**:
-Consumes output matrices to render 8K resolution scatter plots mapped by clothing category and outfit composition.
+## System Pipeline Architecture
 
+The system executes sequentially across independent modules synchronized via `data/pipeline.db` utilizing SQLite WAL mode.
+
+1. Geographic Scoping
+Script: `populate_cities_table.py`
+Logic: Queries Nominatim API to extract spatial bounding boxes for target cities. Implements spherical distortion correction mapping.
+Storage: Target coordinates and status flags stored in the `cities` table.
+2. Image Acquisition
+Script: `download_pipeline.py`
+API: Mapillary API
+Logic: Executes asynchronous `aiohttp` requests with `unique_tiles` deduplication. Resolves bounding boxes into sub-grids for API compliance.
+Storage: Source files saved locally. Metadata written to `images_detected` keyed by globally unique Mapillary `image_id`.
+3. Pedestrian Detection & Cropping
+Script: `detection_pipeline.py`
+Model: YOLOv8 (TensorRT engine `yolov8n.engine`)
+Logic: Isolates human targets using a 75% confidence threshold. Crops bounding box coordinates and discards source imagery lacking target detections to minimize storage overhead.
+Storage: Crops written to `data/cropped_people/`. Spatial relationships stored in `person_detected` with natural key deduplication `(image_id, bbox_person)`.
+4. Clothing Analysis
+Script: `clothing_analysis_pipeline.py`
+Model: Detectron2 (Dual network: Mask R-CNN + Keypoint R-CNN)
+
+Logic: Extracts initial segmentation masks. Applies anatomical pose filtering via joint visibility to refine or discard clothing classes. Enforces strict categorical limits per person. Calculates vectorized HSV color values and Laplacian texture variance.
+Storage: Attributes written to `clothing_item_detected`.
+
+5. Dimensionality Reduction & Feature Matrix
+Script: `generate_feature_matrix.py`
+Method: PyTorch Autoencoder (32D Bottleneck) + UMAP Projection
+
+Logic: Applies asymmetrical feature scalar weighting (Color/Texture: 2.0x, Spatiotemporal metadata: 0.1x) to prevent variance domination. Compresses high-dimensional vectors (LAB color, texture, area ratio, cyclic time, location) into 32 dimensions, then projects to 2D topological coordinates via UMAP.
+Storage: CSV files (`item_*.csv`, `outfit_*.csv`) exported to `data/feature_matrices/` containing spatial coordinates `x, y` and literal hex `color` strings.
 ## Execution Sequence
 
 1. Initialize database: `python init_db.py`
